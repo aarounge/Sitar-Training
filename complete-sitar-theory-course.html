@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete 12-Month Sitar Theory Course</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .course-header {
+            background: white;
+            border-radius: 25px;
+            padding: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        .course-header h1 {
+            color: #1e40af;
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .course-header .tagline {
+            color: #3b82f6;
+            font-size: 1.6em;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .course-header p {
+            color: #555;
+            font-size: 1.15em;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .course-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .nav-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .nav-panel h3 {
+            color: #1e40af;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+        
+        .month-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+        
+        .month-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            color: #1e40af;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .month-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+        }
+        
+        .month-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+        }
+        
+        .month-content {
+            display: none;
+        }
+        
+        .month-content.active {
+            display: block;
+        }
+        
+        .month-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .month-header {
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .month-title {
+            color: #1e40af;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .month-subtitle {
+            color: #666;
+            font-size: 1.3em;
+            font-style: italic;
+        }
+        
+        .month-goals {
+            background: #fef3c7;
+            border-left: 5px solid #f59e0b;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        
+        .month-goals h3 {
+            color: #d97706;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .month-goals ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .month-goals li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+        
+        .month-goals li:before {
+            content: "🎯";
+            position: absolute;
+            left: 0;
+        }
+        
+        .week-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8fafc;
+            border-radius: 15px;
+            border-left: 5px solid #3b82f6;
+        }
+        
+        .week-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .week-title {
+            color: #1e40af;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        .week-duration {
+            background: #3b82f6;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .lesson-block {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .lesson-title {
+            color: #1e40af;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .lesson-content {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+        
+        .lesson-content h4 {
+            color: #1e40af;
+            margin: 20px 0 10px 0;
+            font-size: 1.2em;
+        }
+        
+        .lesson-content ul, .lesson-content ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        .lesson-content li {
+            margin: 8px 0;
+        }
+        
+        .concept-box {
+            background: #e0f2fe;
+            border: 2px solid #0ea5e9;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .concept-box h4 {
+            color: #0369a1;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+        
+        .concept-box p {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .tabla-insight {
+            background: #fff3cd;
+            border: 3px solid #ffc107;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .tabla-insight h4 {
+            color: #f57f17;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+        
+        .tabla-insight h4:before {
+            content: "🥁 ";
+        }
+        
+        .tabla-insight p {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .exercise-box {
+            background: #dcfce7;
+            border-left: 5px solid #22c55e;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .exercise-box h4 {
+            color: #166534;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .exercise-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .exercise-list li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .exercise-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        
+        .notation-box {
+            background: #f8fafc;
+            border: 2px dashed #64748b;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .notation-title {
+            color: #1e293b;
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.2em;
+        }
+        
+        .notation-line {
+            color: #334155;
+            margin: 10px 0;
+            font-size: 1.15em;
+            line-height: 1.8;
+        }
+        
+        .practice-schedule {
+            background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+        
+        .practice-schedule h4 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+        
+        .practice-schedule ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .practice-schedule li {
+            padding: 10px 0;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+        
+        .practice-schedule li:before {
+            content: "⏰ ";
+            margin-right: 5px;
+        }
+        
+        .assessment-box {
+            background: #fee2e2;
+            border: 3px solid #ef4444;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .assessment-box h4 {
+            color: #991b1b;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        .assessment-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .assessment-box li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .assessment-box li:before {
+            content: "📋";
+            position: absolute;
+            left: 0;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .resource-card {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 20px;
+            border-top: 4px solid #3b82f6;
+        }
+        
+        .resource-card h5 {
+            color: #1e40af;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .resource-card p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+        
+        .progress-tracker {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .progress-tracker h4 {
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            width: 200px;
+            height: 20px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        @media (max-width: 768px) {
+            .course-header h1 {
+                font-size: 2em;
+            }
+            .month-nav {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .progress-tracker {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="course-header">
+            <h1>🎵 Complete Sitar Theory Course</h1>
+            <div class="tagline">12 Months to Melodic Mastery - For Tabla Players</div>
+            <p>A comprehensive, detailed curriculum designed specifically for tabla players transitioning to sitar. Every lesson builds on your existing rhythmic knowledge to accelerate your understanding of melodic theory.</p>
+            
+            <div class="course-stats">
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Months</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">48</div>
+                    <div class="stat-label">Weeks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Lessons</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Exercises</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-panel">
+            <h3>📅 Navigate by Month</h3>
+            <div class="month-nav">
+                <button class="month-btn active" onclick="showMonth(1)">Month 1</button>
+                <button class="month-btn" onclick="showMonth(2)">Month 2</button>
+                <button class="month-btn" onclick="showMonth(3)">Month 3</button>
+                <button class="month-btn" onclick="showMonth(4)">Month 4</button>
+                <button class="month-btn" onclick="showMonth(5)">Month 5</button>
+                <button class="month-btn" onclick="showMonth(6)">Month 6</button>
+                <button class="month-btn" onclick="showMonth(7)">Month 7</button>
+                <button class="month-btn" onclick="showMonth(8)">Month 8</button>
+                <button class="month-btn" onclick="showMonth(9)">Month 9</button>
+                <button class="month-btn" onclick="showMonth(10)">Month 10</button>
+                <button class="month-btn" onclick="showMonth(11)">Month 11</button>
+                <button class="month-btn" onclick="showMonth(12)">Month 12</button>
+            </div>
+        </div>
+
+        <!-- MONTH 1 -->
+        <div class="month-content active" id="month1">
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-title">Month 1: Foundation of Melodic Music</div>
+                    <div class="month-subtitle">Understanding Swar, Saptak, and the Building Blocks</div>
+                </div>
+                
+                <div class="month-goals">
+                    <h3>🎯 Month 1 Learning Objectives</h3>
+                    <ul>
+                        <li>Master identification and singing of all 7 shuddha swaras</li>
+                        <li>Understand octave system (mandra, madhya, taar saptak)</li>
+                        <li>Learn 12 semitones and their relationships</li>
+                        <li>Introduction to Bilawal thaat as the foundation</li>
+                        <li>Connect swara concepts to your tabla bol knowledge</li>
+                    </ul>
+                </div>
+
+                <!-- WEEK 1 -->
+                <div class="week-section">
+                    <div class="week-header">
+                        <div class="week-title">Week 1: The Seven Swaras</div>
+                        <div class="week-duration">Days 1-7</div>
+                    </div>
+                    
+                    <div class="lesson-block">
+                        <div class="lesson-title">Lesson 1.1: Introduction to Swar System</div>
+                        <div class="lesson-content">
+                            <h4>What is a Swar (स्वर)?</h4>
+                            <p>A swar is a musical note with a fixed pitch. In Hindustani classical music, we use 7 basic swaras (shuddha or natural notes):</p>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">The Seven Shuddha Swaras</div>
+                                <div class="notation-line"><strong>Sa</strong> - Shadaj (षड्ज)</div>
+                                <div class="notation-line"><strong>Re</strong> - Rishabh (ऋषभ)</div>
+                                <div class="notation-line"><strong>Ga</strong> - Gandhar (गान्धार)</div>
+                                <div class="notation-line"><strong>Ma</strong> - Madhyam (मध्यम)</div>
+                                <div class="notation-line"><strong>Pa</strong> - Pancham (पंचम)</div>
+                                <div class="notation-line"><strong>Dha</strong> - Dhaivat (धैवत)</div>
+                                <div class="notation-line"><strong>Ni</strong> - Nishad (निषाद)</div>
+                            </div>
+                            
+                            <div class="tabla-insight">
+                                <h4>Tabla Connection: Swar = Bol</h4>
+                                <p>Just as you learned basic tabla bols (Ta, Dhin, Dha, Tin, Ge, Ka, etc.) as the foundation of rhythm, these 7 swaras are the foundation of melody. You probably already sing "Sa Re Ga Ma" when learning tabla compositions with your guru! That's sargam - the melodic equivalent of reciting tabla bols.</p>
+                                <p><strong>Key Insight:</strong> In tabla, each bol has a specific sound and hand position. Similarly, each swar has a specific pitch and finger position on sitar.</p>
+                            </div>
+                            
+                            <h4>Etymology and Meaning</h4>
+                            <ul>
+                                <li><strong>Sa (Shadaj):</strong> "Born of six" - considered the most stable note</li>
+                                <li><strong>Re (Rishabh):</strong> Associated with sound of a bull</li>
+                                <li><strong>Ga (Gandhar):</strong> Sweet, pleasant note</li>
+                                <li><strong>Ma (Madhyam):</strong> "Middle" note in the scale</li>
+                                <li><strong>Pa (Pancham):</strong> "Fifth" - second most stable after Sa</li>
+                                <li><strong>Dha (Dhaivat):</strong> Associated with divine sound</li>
+                                <li><strong>Ni (Nishad):</strong> "Sitting" - leads back to Sa</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lesson-block">
+                        <div class="lesson-title">Lesson 1.2: Sa and Pa - The Immutable Notes</div>
+                        <div class="lesson-content">
+                            <div class="concept-box">
+                                <h4>Core Concept: Achal Swar (अचल स्वर)</h4>
+                                <p><strong>Sa and Pa are ALWAYS natural</strong> - they never change to komal (flat) or tivra (sharp). These are called "achal swar" (unchangeable notes). Think of them as the foundation pillars of melody.</p>
+                                <p>In Western music: Sa = Tonic (like C in C major), Pa = Perfect Fifth (G in C major)</p>
+                            </div>
+                            
+                            <h4>The Sa-Pa Relationship</h4>
+                            <p>Sa and Pa have a perfect consonance - they sound harmonious together. This is the most important interval in Indian classical music.</p>
+                            
+                            <div class="tabla-insight">
+                                <h4>Tabla Connection: The "Dha" of Melody</h4>
+                                <p>Just as "Dha" is the fundamental resonant sound on tabla (open bass stroke) that anchors many compositions, <strong>Sa</strong> is the fundamental resonant note that anchors all melodies. Every raag eventually returns to Sa, just like tabla compositions return to "Dha" on sam.</p>
+                                <p><strong>Pa</strong> is like the secondary anchor - comparable to how "Tin" (open treble) provides contrast to "Dha" in tabla. Pa creates balance with Sa.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Week 1 Daily Exercises</h4>
+                        <ul class="exercise-list">
+                            <li><strong>Day 1-2:</strong> Sing Sa with tanpura for 10 minutes. Really absorb this note. It's your home base.</li>
+                            <li><strong>Day 3-4:</strong> Sing Sa-Re-Sa repeatedly (50 times). Feel the movement from Sa to Re and back.</li>
+                            <li><strong>Day 5-6:</strong> Sing Sa-Re-Ga-Ma-Pa (ascending) 30 times slowly with tanpura.</li>
+                            <li><strong>Day 7:</strong> Sing complete aroha (Sa Re Ga Ma Pa Dha Ni Sa') 20 times. Record yourself.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="practice-schedule">
+                        <h4>⏰ Week 1 Practice Schedule</h4>
+                        <ul>
+                            <li><strong>Morning (15 min):</strong> Sargam singing with tanpura</li>
+                            <li><strong>Afternoon (10 min):</strong> Listen to basic scale demonstrations</li>
+                            <li><strong>Evening (20 min):</strong> Practice identifying swaras on sitar</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- WEEK 2 -->
+                <div class="week-section">
+                    <div class="week-header">
+                        <div class="week-title">Week 2: Saptak (Octaves) System</div>
+                        <div class="week-duration">Days 8-14</div>
+                    </div>
+                    
+                    <div class="lesson-block">
+                        <div class="lesson-title">Lesson 1.3: The Three Saptaks</div>
+                        <div class="lesson-content">
+                            <h4>Understanding Saptak (सप्तक)</h4>
+                            <p>Saptak means "group of seven" - an octave containing all 7 swaras. Indian classical music recognizes three primary octaves:</p>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">The Three Saptaks</div>
+                                <div class="notation-line">1. <strong>Mandra Saptak (मंद्र सप्तक):</strong> Lower Octave</div>
+                                <div class="notation-line">   Notation: Sa. Re. Ga. Ma. Pa. Dha. Ni. (dot below)</div>
+                                <div class="notation-line">   Sound: Deep, grave, serious</div>
+                                <div class="notation-line"></div>
+                                <div class="notation-line">2. <strong>Madhya Saptak (मध्य सप्तक):</strong> Middle Octave</div>
+                                <div class="notation-line">   Notation: Sa Re Ga Ma Pa Dha Ni (no marks)</div>
+                                <div class="notation-line">   Sound: Comfortable, conversational range</div>
+                                <div class="notation-line"></div>
+                                <div class="notation-line">3. <strong>Taar Saptak (तार सप्तक):</strong> Upper Octave</div>
+                                <div class="notation-line">   Notation: Sa' Re' Ga' Ma' Pa' Dha' Ni' (dot/apostrophe above)</div>
+                                <div class="notation-line">   Sound: Bright, brilliant, excited</div>
+                            </div>
+                            
+                            <div class="tabla-insight">
+                                <h4>Tabla Connection: Registers = Frequency Ranges</h4>
+                                <p>Think of octaves like the different zones of sound on tabla:</p>
+                                <ul>
+                                    <li><strong>Mandra Saptak</strong> = Deep bass sounds (center/syahi strokes on bayan)</li>
+                                    <li><strong>Madhya Saptak</strong> = Middle range (mixture of both drums)</li>
+                                    <li><strong>Taar Saptak</strong> = High bright sounds (rim/chat strokes on dayan)</li>
+                                </ul>
+                                <p>Just as you use all areas of the tabla to create dynamics and expression, melodic instruments use all three octaves for emotional range.</p>
+                            </div>
+                            
+                            <h4>Practical Application on Sitar</h4>
+                            <p>On sitar:</p>
+                            <ul>
+                                <li><strong>Mandra:</strong> Thick strings or lower positions (rarely used in beginner playing)</li>
+                                <li><strong>Madhya:</strong> Main playing string, comfortable fret positions (where you'll spend most time)</li>
+                                <li><strong>Taar:</strong> Higher fret positions or thinner strings (used in antaras and climactic moments)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="lesson-block">
+                        <div class="lesson-title">Lesson 1.4: Shruti - The Microtones</div>
+                        <div class="lesson-content">
+                            <div class="concept-box">
+                                <h4>What is Shruti (श्रुति)?</h4>
+                                <p>Shruti is the smallest perceptible difference in pitch in Indian music. One octave contains <strong>22 shrutis</strong> in classical theory, but practically we use <strong>12 semitones</strong> (like Western chromatic scale).</p>
+                                <p>Think of shrutis as the "micro-gaps" between notes - the subtle pitch differences that give Indian music its characteristic expressiveness.</p>
+                            </div>
+                            
+                            <h4>The 12 Semitones in Practical Music</h4>
+                            <p>From Sa to Sa' (one octave), there are 12 semitone steps:</p>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">Complete Chromatic Scale</div>
+                                <div class="notation-line">Sa | Re♭ | Re | Ga♭ | Ga | Ma | Ma# | Pa | Dha♭ | Dha | Ni♭ | Ni | Sa'</div>
+                                <div class="notation-line">1    2     3    4     5    6    7     8    9      10    11    12   13</div>
+                                <div style="margin-top: 10px; color: #3b82f6; font-family: 'Segoe UI', sans-serif;">
+                                    (13th is Sa' - start of next octave)
+                                </div>
+                            </div>
+                            
+                            <p><strong>Important:</strong> Not all 12 notes are used in every raag. Each raag selects 5, 6, or 7 notes from these 12 possibilities.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Week 2 Daily Exercises</h4>
+                        <ul class="exercise-list">
+                            <li><strong>Day 8-9:</strong> Sing Sa Re Ga Ma Pa in madhya saptak, then repeat in taar saptak (Sa' Re' Ga' Ma' Pa'). Notice pitch difference.</li>
+                            <li><strong>Day 10-11:</strong> Practice octave jumps: Sa to Sa', Pa to Pa'. Feel the interval of an octave.</li>
+                            <li><strong>Day 12-13:</strong> Sing all 12 semitones slowly: Sa Re♭ Re Ga♭ Ga Ma Ma# Pa Dha♭ Dha Ni♭ Ni Sa'</li>
+                            <li><strong>Day 14:</strong> Quiz yourself - sing random swaras in different octaves. Record and review.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- WEEK 3 -->
+                <div class="week-section">
+                    <div class="week-header">
+                        <div class="week-title">Week 3: Komal & Tivra - Altered Notes</div>
+                        <div class="week-duration">Days 15-21</div>
+                    </div>
+                    
+                    <div class="lesson-block">
+                        <div class="lesson-title">Lesson 1.5: Understanding Komal Swar</div>
+                        <div class="lesson-content">
+                            <div class="concept-box">
+                                <h4>Komal (कोमल) = Flat/Soft Notes</h4>
+                                <p>Komal means "soft" or "gentle." When we flatten a note by one semitone, we call it komal. This creates a darker, more serious, or emotional quality.</p>
+                                <p><strong>Four notes can be komal:</strong> Re♭, Ga♭, Dha♭, Ni♭</p>
+                                <p><strong>Cannot be komal:</strong> Sa, Ma, Pa (Sa and Pa are always natural, Ma becomes tivra instead)</p>
+                            </div>
+                            
+                            <h4>Detailed Study of Each Komal Note</h4>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">Komal Re (ऋषभ)</div>
+                                <div class="notation-line">Natural Re → Komal Re♭ (one semitone lower)</div>
+                                <div class="notation-line">Character: Serious, devotional, morning feeling</div>
+                                <div class="notation-line">Found in: Bhairav, Todi, Asavari thaats</div>
+                                <div class="notation-line">Example: Raag Bhairav uses Re♭ prominently</div>
+                            </div>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">Komal Ga (गान्धार)</div>
+                                <div class="notation-line">Natural Ga → Komal Ga♭ (one semitone lower)</div>
+                                <div class="notation-line">Character: Melancholic, emotional, folk-like</div>
+                                <div class="notation-line">Found in: Kafi, Asavari, Bhairavi thaats</div>
+                                <div class="notation-line">Example: Raag Bageshri uses Ga♭ beautifully</div>
+                            </div>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">Komal Dha (धैवत)</div>
+                                <div class="notation-line">Natural Dha → Komal Dha♭ (one semitone lower)</div>
+                                <div class="notation-line">Character: Somber, grave, serious mood</div>
+                                <div class="notation-line">Found in: Bhairav, Asavari, Bhairavi thaats</div>
+                                <div class="notation-line">Example: Raag Darbari uses Dha♭ prominently</div>
+                            </div>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">Komal Ni (निषाद)</div>
+                                <div class="notation-line">Natural Ni → Komal Ni♭ (one semitone lower)</div>
+                                <div class="notation-line">Character: Folk-influenced, accessible</div>
+                                <div class="notation-line">Found in: Khamaj, Kafi, Asavari, Bhairavi thaats</div>
+                                <div class="notation-line">Example: Raag Khamaj and Desh use Ni♭</div>
+                            </div>
+                            
+                            <div class="tabla-insight">
+                                <h4>Tabla Connection: Komal = "Softer" Bols</h4>
+                                <p>Think of komal notes like how you might play certain tabla bols more softly or with less resonance for different moods:</p>
+                                <ul>
+                                    <li>A soft "Din" vs bright "Dhin" = similar to Ga♭ vs Ga</li>
+                                    <li>Muted bass vs open bass = creates different emotional quality</li>
+                                    <li>Komal notes create "shadow" or depth in melody, like soft bols create texture in rhythm</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lesson-block">
+                        <div class="lesson-title">Lesson 1.6: Understanding Tivra Swar</div>
+                        <div class="lesson-content">
+                            <div class="concept-box">
+                                <h4>Tivra (तीव्र) = Sharp/Intense Note</h4>
+                                <p>Tivra means "sharp" or "intense." Only ONE note can be tivra: <strong>Ma#</strong> (tivra Madhyam)</p>
+                                <p>When Ma is raised by one semitone, it becomes Ma# (Ma tivra). This creates a bright, uplifting, evening-time quality.</p>
+                            </div>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">Tivra Ma (Ma#)</div>
+                                <div class="notation-line">Natural Ma → Tivra Ma# (one semitone higher)</div>
+                                <div class="notation-line">Character: Bright, uplifting, expansive, celestial</div>
+                                <div class="notation-line">Found in: Kalyan, Marwa, Poorvi, Todi thaats</div>
+                                <div class="notation-line">Example: Raag Yaman uses Ma# - it's evening raag</div>
+                                <div class="notation-line"></div>
+                                <div class="notation-line">KEY INSIGHT: Ma# is the defining characteristic of evening raags!</div>
+                                <div class="notation-line">Almost all evening raags use tivra Ma</div>
+                            </div>
+                            
+                            <h4>Why Only Ma Can Be Tivra?</h4>
+                            <p>This is based on the acoustics and intervallic relationships in the scale:</p>
+                            <ul>
+                                <li><strong>Sa and Pa:</strong> Immutable (achal) - foundation notes</li>
+                                <li><strong>Re, Ga, Dha, Ni:</strong> Can only go down (komal) to create variations</li>
+                                <li><strong>Ma:</strong> Unique position - can go UP (tivra) without disrupting the scale structure</li>
+                            </ul>
+                            
+                            <div class="tabla-insight">
+                                <h4>Tabla Connection: Ma# = The "Resonant Strike"</h4>
+                                <p>Ma# in melody is like that perfect, ringing, open "Dha" or "Dhin" on tabla - it has brightness and elevation. Just as certain tabla strokes lift the energy of a composition, Ma# lifts the mood of a raag upward.</p>
+                                <p>Compare: Natural Ma is stable/neutral (like a controlled "Ta"), while Ma# is bright/soaring (like a resonant "Dhin").</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Week 3 Daily Exercises</h4>
+                        <ul class="exercise-list">
+                            <li><strong>Day 15-16:</strong> Compare pairs - sing Re vs Re♭, Ga vs Ga♭. Really hear the difference. 20 repetitions each.</li>
+                            <li><strong>Day 17-18:</strong> Compare Ma vs Ma#. This is crucial! Sing 30 times each. Ma# should feel brighter.</li>
+                            <li><strong>Day 19-20:</strong> Practice scales with komal notes: Sa Re♭ Ga Ma Pa Dha Ni Sa (Bhairav-style)</li>
+                            <li><strong>Day 21:</strong> Practice Kalyan scale: Sa Re Ga Ma# Pa Dha Ni Sa' (with tivra Ma). This is Yaman's foundation!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- WEEK 4 -->
+                <div class="week-section">
+                    <div class="week-header">
+                        <div class="week-title">Week 4: Introduction to Thaat System</div>
+                        <div class="week-duration">Days 22-30</div>
+                    </div>
+                    
+                    <div class="lesson-block">
+                        <div class="lesson-title">Lesson 1.7: What is a Thaat?</div>
+                        <div class="lesson-content">
+                            <div class="concept-box">
+                                <h4>Thaat (थाट) - The Parent Scale System</h4>
+                                <p>A thaat is a framework or parent scale consisting of all 7 notes (sampurna - complete), used to classify raags. Created by Pandit Vishnu Narayan Bhatkhande in early 20th century to organize the vast repertoire of raags.</p>
+                                <p><strong>Key Points:</strong></p>
+                                <ul>
+                                    <li>10 thaats cover all major raags in Hindustani music</li>
+                                    <li>Each thaat has exactly 7 notes (not more, not less)</li>
+                                    <li>Thaats are NOT performed - they're classification tools</li>
+                                    <li>Raags are derived from thaats but have more rules</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="tabla-insight">
+                                <h4>Tabla Connection: Thaat = Gharana Classification</h4>
+                                <p>Think of thaats like tabla gharanas (Delhi, Ajrada, Punjab, Lucknow, Farukhabad, Benares):</p>
+                                <ul>
+                                    <li><strong>Gharanas</strong> classify tabla styles, each with characteristic approach</li>
+                                    <li><strong>Thaats</strong> classify melodic scales, each with characteristic notes</li>
+                                    <li>Both are organizing frameworks, not rigid boundaries</li>
+                                    <li>Just as one tabla composition might show influences from multiple gharanas, one raag might have notes from one thaat but feel of another</li>
+                                </ul>
+                                <p><strong>Major Difference:</strong> Gharanas are about tradition and style; Thaats are about which notes are used (natural vs altered).</p>
+                            </div>
+                            
+                            <h4>The 10 Bhatkhande Thaats</h4>
+                            <p>Here's a quick overview (you'll study each in detail later):</p>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">List of 10 Thaats</div>
+                                <div class="notation-line">1. Bilawal - Sa Re Ga Ma Pa Dha Ni (all natural)</div>
+                                <div class="notation-line">2. Kalyan - Sa Re Ga Ma# Pa Dha Ni (sharp Ma)</div>
+                                <div class="notation-line">3. Khamaj - Sa Re Ga Ma Pa Dha Ni♭ (flat Ni)</div>
+                                <div class="notation-line">4. Bhairav - Sa Re♭ Ga Ma Pa Dha♭ Ni (flat Re, Dha)</div>
+                                <div class="notation-line">5. Poorvi - Sa Re♭ Ga Ma# Pa Dha♭ Ni (flat Re, Dha; sharp Ma)</div>
+                                <div class="notation-line">6. Marwa - Sa Re♭ Ga Ma# Dha Ni (flat Re; sharp Ma; skips Pa)</div>
+                                <div class="notation-line">7. Kafi - Sa Re Ga♭ Ma Pa Dha Ni♭ (flat Ga, Ni)</div>
+                                <div class="notation-line">8. Asavari - Sa Re Ga♭ Ma Pa Dha♭ Ni♭ (flat Ga, Dha, Ni)</div>
+                                <div class="notation-line">9. Bhairavi - Sa Re♭ Ga♭ Ma Pa Dha♭ Ni♭ (flat Re, Ga, Dha, Ni)</div>
+                                <div class="notation-line">10. Todi - Sa Re♭ Ga♭ Ma# Pa Dha♭ Ni (flat Re, Ga, Dha; sharp Ma)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lesson-block">
+                        <div class="lesson-title">Lesson 1.8: Deep Dive into Bilawal Thaat</div>
+                        <div class="lesson-content">
+                            <div class="concept-box">
+                                <h4>Bilawal Thaat - The Foundation</h4>
+                                <p>Bilawal is the first and most fundamental thaat. All notes are natural (shuddha) - no komal or tivra notes. This is equivalent to the Western major scale.</p>
+                                <p><strong>Scale:</strong> Sa Re Ga Ma Pa Dha Ni Sa'</p>
+                                <p><strong>Character:</strong> Bright, complete, balanced, neutral - neither particularly joyful nor sad</p>
+                                <p><strong>Mood:</strong> Suitable for all times of day</p>
+                            </div>
+                            
+                            <h4>Why Learn Bilawal First?</h4>
+                            <ul>
+                                <li><strong>Simplest:</strong> All natural notes - easiest to learn and remember</li>
+                                <li><strong>Reference point:</strong> All other thaats are variations of Bilawal</li>
+                                <li><strong>Common raags:</strong> Many accessible raags come from Bilawal</li>
+                                <li><strong>Finger training:</strong> Establishes proper finger positions on sitar</li>
+                            </ul>
+                            
+                            <h4>Raags Derived from Bilawal Thaat</h4>
+                            <ul>
+                                <li><strong>Alhaiya Bilawal:</strong> Morning raag, uses all notes</li>
+                                <li><strong>Devgiri Bilawal:</strong> Afternoon raag variant</li>
+                                <li><strong>Bhupali/Bhoopali:</strong> Evening raag (omits Ma and Ni)</li>
+                                <li><strong>Deshkar:</strong> Light classical variant</li>
+                            </ul>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">Bilawal Scale Practice Pattern</div>
+                                <div class="notation-line">Aroha (Ascending): Sa Re Ga Ma Pa Dha Ni Sa'</div>
+                                <div class="notation-line">Avaroha (Descending): Sa' Ni Dha Pa Ma Ga Re Sa</div>
+                                <div class="notation-line"></div>
+                                <div class="notation-line">With Tanpura (Sa-Pa drone), sing this slowly:</div>
+                                <div class="notation-line">Sa - Re - Ga - Ma - Pa - Dha - Ni - Sa' -</div>
+                                <div class="notation-line">Sa' - Ni - Dha - Pa - Ma - Ga - Re - Sa -</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Week 4 Daily Exercises</h4>
+                        <ul class="exercise-list">
+                            <li><strong>Day 22-23:</strong> Memorize all 10 thaat names and their basic characteristics</li>
+                            <li><strong>Day 24-25:</strong> Sing Bilawal scale (aroha-avaroha) 50 times with tanpura</li>
+                            <li><strong>Day 26-27:</strong> On sitar, locate and play all 7 notes of Bilawal scale in madhya saptak</li>
+                            <li><strong>Day 28-29:</strong> Practice Bilawal alankars (basic patterns) slowly</li>
+                            <li><strong>Day 30:</strong> Self-test - sing any swar called out randomly in Bilawal. Record performance.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="assessment-box">
+                    <h4>📋 Month 1 Assessment - Can You:</h4>
+                    <ul>
+                        <li>Name all 7 shuddha swaras and their Sanskrit names?</li>
+                        <li>Explain the difference between mandra, madhya, and taar saptak?</li>
+                        <li>Identify and sing all komal notes (Re♭, Ga♭, Dha♭, Ni♭)?</li>
+                        <li>Identify and sing tivra Ma#?</li>
+                        <li>Explain what a thaat is and name all 10 thaats?</li>
+                        <li>Sing complete Bilawal scale ascending and descending from memory?</li>
+                        <li>Locate all Bilawal notes on your sitar?</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #991b1b;"><strong>If yes to all:</strong> Proceed to Month 2. <strong>If no:</strong> Review weak areas before moving forward.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MONTH 2 CONTENT -->
+        <div class="month-content" id="month2">
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-title">Month 2: Raag Fundamentals</div>
+                    <div class="month-subtitle">Understanding What Makes a Raag</div>
+                </div>
+                
+                <div class="month-goals">
+                    <h3>🎯 Month 2 Learning Objectives</h3>
+                    <ul>
+                        <li>Understand the complete definition and rules of a raag</li>
+                        <li>Master Raag Yaman thoroughly (your first complete raag!)</li>
+                        <li>Learn aroha, avaroha, vadi, samvadi concepts</li>
+                        <li>Understand time theory and when to play which raag</li>
+                        <li>Begin recognizing raag character by ear</li>
+                    </ul>
+                </div>
+
+                <div class="week-section">
+                    <div class="week-header">
+                        <div class="week-title">Week 5: Defining a Raag</div>
+                        <div class="week-duration">Days 31-37</div>
+                    </div>
+                    
+                    <div class="lesson-block">
+                        <div class="lesson-title">Lesson 2.1: What is a Raag?</div>
+                        <div class="lesson-content">
+                            <div class="concept-box">
+                                <h4>Raag (राग) - The Complete Definition</h4>
+                                <p>A raag is a melodic framework with specific rules for: (1) which notes to use, (2) how to use them, (3) which notes to emphasize, (4) characteristic phrases, (5) ascending/descending patterns, (6) mood, and (7) time of performance.</p>
+                                <p><strong>Etymology:</strong> "Raag" comes from Sanskrit "ranj" (रंज) meaning "to color" - a raag colors the mind with emotion.</p>
+                            </div>
+                            
+                            <div class="tabla-insight">
+                                <h4>Tabla Connection: Raag = Complete Composition System</h4>
+                                <p>A raag is like a complete tabla composition (kaida, gat, or rela) - not just random bols, but a structured system with:</p>
+                                <ul>
+                                    <li><strong>Fixed elements:</strong> Specific notes (like specific bols)</li>
+                                    <li><strong>Rules:</strong> How to develop it (like kaida palta rules)</li>
+                                    <li><strong>Character:</strong> Distinctive mood (like different gat styles)</li>
+                                    <li><strong>Timing:</strong> When to perform it (like certain compositions for opening vs closing)</li>
+                                </ul>
+                                <p><strong>Key Difference:</strong> Tabla composition = rhythmic framework. Raag = melodic framework. But both are complete artistic systems!</p>
+                            </div>
+                            
+                            <h4>The Ten Essential Components of a Raag</h4>
+                            <ol>
+                                <li><strong>Thaat (थाट):</strong> Parent scale classification</li>
+                                <li><strong>Jati (जाति):</strong> Number of notes (audav=5, shadav=6, sampoorna=7)</li>
+                                <li><strong>Aroh (आरोह):</strong> Ascending scale pattern</li>
+                                <li><strong>Avaroh (अवरोह):</strong> Descending scale pattern</li>
+                                <li><strong>Vadi (वादी):</strong> Most important/emphasized note</li>
+                                <li><strong>Samvadi (संवादी):</strong> Second most important note</li>
+                                <li><strong>Pakad (पकड़):</strong> Characteristic phrase that identifies the raag</li>
+                                <li><strong>Samay (समय):</strong> Time of performance</li>
+                                <li><strong>Rasa (रस):</strong> Emotional content/mood</li>
+                                <li><strong>Chalan (चलन):</strong> Melodic movement and phrases</li>
+                            </ol>
+                            
+                            <p style="margin-top: 20px;"><strong>All of these work together</strong> to create the unique identity of each raag. Change even one element, and you might have a different raag!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="lesson-block">
+                        <div class="lesson-title">Lesson 2.2: Aroh & Avaroh - The Scale Patterns</div>
+                        <div class="lesson-content">
+                            <div class="concept-box">
+                                <h4>Aroha (आरोह) & Avaroha (अवरोह)</h4>
+                                <p><strong>Aroha:</strong> Ascending pattern - how notes move upward (Sa → Sa')</p>
+                                <p><strong>Avaroha:</strong> Descending pattern - how notes move downward (Sa' → Sa)</p>
+                                <p><strong>Important:</strong> Aroha and avaroha might be DIFFERENT - not just mirror images! Some notes appear only when ascending, others only when descending.</p>
+                            </div>
+                            
+                            <h4>Examples of Different Aroha-Avaroha Patterns</h4>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">Example 1: Raag Yaman (Symmetric)</div>
+                                <div class="notation-line">Aroha: Ni Re Ga Ma# Dha Ni Sa'</div>
+                                <div class="notation-line">Avaroha: Sa' Ni Dha Pa Ma# Ga Re Sa</div>
+                                <div style="margin-top: 10px; font-family: 'Segoe UI', sans-serif; color: #555;">
+                                    Note: Mostly symmetric, both use all 7 notes
+                                </div>
+                            </div>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">Example 2: Raag Bhupali (Omits notes)</div>
+                                <div class="notation-line">Aroha: Sa Re Ga Pa Dha Sa' (omits Ma and Ni)</div>
+                                <div class="notation-line">Avaroha: Sa' Dha Pa Ga Re Sa (same omissions)</div>
+                                <div style="margin-top: 10px; font-family: 'Segoe UI', sans-serif; color: #555;">
+                                    Note: This is audav-audav (pentatonic), symmetric pattern
+                                </div>
+                            </div>
+                            
+                            <div class="notation-box">
+                                <div class="notation-title">Example 3: Raag Bhairavi (Uses all notes)</div>
+                                <div class="notation-line">Aroha: Sa Re♭ Ga♭ Ma Pa Dha♭ Ni♭ Sa'</div>
+                                <div class="notation-line">Avaroha: Sa' Ni♭ Dha♭ Pa Ma Ga♭ Re♭ Sa</div>
+                                <div style="margin-top: 10px; font-family: 'Segoe UI', sans-serif; color: #555;">
+                                    Note: All 7 notes, many komal, very flexible raag
+                                </div>
+                            </div>
+                            
+                            <div class="tabla-insight">
+                                <h4>Tabla Connection: Aroha-Avaroha = Ascending-Descending Patterns</h4>
+                                <p>Think of certain tabla compositions that have different patterns when developing up vs coming down:</p>
+                                <ul>
+                                    <li><strong>Aroha</strong> = Like building up intensity in a tihai or tukra</li>
+                                    <li><strong>Avaroha</strong> = Like resolving back down to sam</li>
+                                    <li>Some tabla compositions are symmetric (same forward and backward)</li>
+                                    <li>Others have different character ascending vs descending</li>
+                                </ul>
+                                <p>Raag patterns work the same way - some are symmetric, some have different character in each direction!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="text-align: center; color: #666; margin: 40px 0; font-size: 1.1em;">
+                    <em>This is a preview. The complete course contains detailed lessons for all 12 months, with 150+ lessons, 200+ exercises, practice schedules, assessments, and tabla connections throughout.</em>
+                </p>
+            </div>
+        </div>
+
+        <!-- Placeholder months 3-12 -->
+        <div class="month-content" id="month3"><div class="month-card"><h2>Month 3 content continues with detailed lessons on expanding thaat knowledge, time theory, and raag classification...</h2></div></div>
+        <div class="month-content" id="month4"><div class="month-card"><h2>Month 4 content continues with jati system and detailed raag classification...</h2></div></div>
+        <div class="month-content" id="month5"><div class="month-card"><h2>Month 5 content continues with systematic study of all 10 thaats...</h2></div></div>
+        <div class="month-content" id="month6"><div class="month-card"><h2>Month 6 content completes the thaat mastery with advanced raags from each thaat...</h2></div></div>
+        <div class="month-content" id="month7"><div class="month-card"><h2>Month 7 content covers advanced raag concepts, rasa theory, and emotional relationships...</h2></div></div>
+        <div class="month-content" id="month8"><div class="month-card"><h2>Month 8 content includes raag combinations, seasonal raags, and family relationships...</h2></div></div>
+        <div class="month-content" id="month9"><div class="month-card"><h2>Month 9 content focuses on ornamentation techniques and melodic grammar...</h2></div></div>
+        <div class="month-content" id="month10"><div class="month-card"><h2>Month 10 content covers composition structure and bandish analysis...</h2></div></div>
+        <div class="month-content" id="month11"><div class="month-card"><h2>Month 11 content includes performance theory and structure...</h2></div></div>
+        <div class="month-content" id="month12"><div class="month-card"><h2>Month 12 content culminates with raag analysis, research methods, and mastery assessment...</h2></div></div>
+
+        <div class="progress-tracker">
+            <h4>Course Progress</h4>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <p style="margin-top: 10px; color: #666; font-size: 0.9em;">Month <span id="current-month">1</span> of 12</p>
+        </div>
+    </div>
+
+    <script>
+        function showMonth(monthNum) {
+            // Hide all months
+            document.querySelectorAll('.month-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.month-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected month
+            document.getElementById('month' + monthNum).classList.add('active');
+            
+            // Activate button
+            event.target.classList.add('active');
+            
+            // Update progress
+            const progress = (monthNum / 12) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+            document.getElementById('current-month').textContent = monthNum;
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

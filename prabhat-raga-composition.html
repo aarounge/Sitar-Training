@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prabhat Raga - Your First Sitar Composition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #764ba2;
+            font-size: 1.3em;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .inspiration-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        
+        .inspiration-box h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .inspiration-box p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+        
+        .composition-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .composition-title {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .notation-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid #667eea;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            color: #667eea;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .tempo-badge {
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        .notation-line {
+            font-family: 'Courier New', monospace;
+            font-size: 1.3em;
+            color: #333;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #f5576c;
+        }
+        
+        .notation-line:hover {
+            background: #fff9e6;
+            transition: background 0.3s;
+        }
+        
+        .beat-marker {
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .phrase-label {
+            color: #f5576c;
+            font-size: 0.9em;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+        
+        .play-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .play-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .play-button:active {
+            transform: translateY(0);
+        }
+        
+        .practice-tracker {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .practice-tracker h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .streak-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .practice-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-top: 20px;
+        }
+        
+        .day-cell {
+            aspect-ratio: 1;
+            background: #e2e8f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85em;
+            color: #666;
+        }
+        
+        .day-cell:hover {
+            background: #cbd5e0;
+        }
+        
+        .day-cell.practiced {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .tip-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .tip-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .tip-title {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .tip-content {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+        
+        .tabla-connection {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .tabla-connection h4 {
+            color: #f57f17;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .tabla-connection p {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .video-tutorial {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .tutorial-steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        
+        .tutorial-steps li {
+            counter-increment: step-counter;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .tutorial-steps li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .motivation-quote {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin: 25px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .motivation-quote p {
+            font-size: 1.3em;
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        
+        .motivation-quote .author {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .notation-line {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 Prabhat Raga</h1>
+            <div class="subtitle">प्रभात राग - Morning Light</div>
+            <p>Your first beautiful sitar composition. Simple, melodious, and deeply satisfying to play. Based on Raag Bilawal (your foundation!), this piece captures the freshness of dawn.</p>
+        </div>
+        
+        <div class="inspiration-box">
+            <h2>✨ Why This Composition Will Keep You Motivated</h2>
+            <p>Unlike simple exercises, this is a real melody you can be proud of! It sounds beautiful even at slow speeds, uses only notes you've learned in Bilawal, and takes just 2 weeks to master. Plus, you can play it with tabla accompaniment!</p>
+        </div>
+        
+        <div class="practice-tracker">
+            <h3>🔥 Your Practice Streak</h3>
+            <div class="streak-display">
+                <div class="stat-box">
+                    <div class="stat-number" id="streak-days">0</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="total-practices">0</div>
+                    <div class="stat-label">Total Practices</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="minutes-practiced">0</div>
+                    <div class="stat-label">Minutes</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <button class="play-button" onclick="markPracticeToday()">✓ Mark Today's Practice</button>
+                <input type="number" id="practice-minutes" placeholder="Minutes practiced" 
+                       style="padding: 10px; border-radius: 8px; border: 2px solid #667eea; margin-left: 10px; width: 150px;">
+            </div>
+            
+            <h4 style="color: #667eea; margin-top: 25px; margin-bottom: 10px;">Last 14 Days</h4>
+            <div class="practice-days" id="practice-calendar"></div>
+        </div>
+
+        <div class="composition-card">
+            <h2 class="composition-title">🎼 The Composition - Full Score</h2>
+            
+            <!-- SECTION A -->
+            <div class="notation-section">
+                <div class="section-header">
+                    <span class="section-title">Section A: Awakening (Sthāyī)</span>
+                    <span class="tempo-badge">50 BPM • Vilambit</span>
+                </div>
+                
+                <div class="phrase-label">Phrase 1 - The Dawn Rises</div>
+                <div class="notation-line">
+                    <span class="beat-marker">X</span> Sa Re Ga Re | <span class="beat-marker">2</span> Sa - - - |
+                    <span class="beat-marker">0</span> Pa Ma Ga Ma | <span class="beat-marker">3</span> Pa - - - ||
+                </div>
+                
+                <div class="phrase-label">Phrase 2 - First Light</div>
+                <div class="notation-line">
+                    <span class="beat-marker">X</span> Dha Pa Ma Ga | <span class="beat-marker">2</span> Ma Re Sa Re |
+                    <span class="beat-marker">0</span> Ga - Re - | <span class="beat-marker">3</span> Sa - - - ||
+                </div>
+                
+                <div class="tabla-connection">
+                    <h4>🥁 Tabla Connection - Teen Taal Structure</h4>
+                    <p>This is standard teen taal (16 beats). Sam (X) on first beat, khali (0) on beat 9. You know this intimately! The melody respects taal structure - returning to Sa or Pa on important beats. Think of how tabla compositions resolve to "Dha" on sam - same principle here.</p>
+                </div>
+            </div>
+            
+            <!-- SECTION B -->
+            <div class="notation-section">
+                <div class="section-header">
+                    <span class="section-title">Section B: Joy (Antarā)</span>
+                    <span class="tempo-badge">50 BPM • Vilambit</span>
+                </div>
+                
+                <div class="phrase-label">Phrase 3 - Ascending Hope</div>
+                <div class="notation-line">
+                    <span class="beat-marker">X</span> Sa' Ni Dha Pa | <span class="beat-marker">2</span> Dha Ma Pa Ma |
+                    <span class="beat-marker">0</span> Ga - - - | <span class="beat-marker">3</span> Ma Re Sa Re ||
+                </div>
+                
+                <div class="phrase-label">Phrase 4 - Resolution</div>
+                <div class="notation-line">
+                    <span class="beat-marker">X</span> Ga Ma Pa Dha | <span class="beat-marker">2</span> Pa Ma Ga Re |
+                    <span class="beat-marker">0</span> Sa Re Ga Re | <span class="beat-marker">3</span> Sa - - - ||
+                </div>
+            </div>
+            
+            <!-- PLAYING INSTRUCTIONS -->
+            <div class="video-tutorial">
+                <h3 style="color: #667eea; margin-bottom: 20px; font-size: 1.6em;">📚 How to Learn This Piece</h3>
+                
+                <ul class="tutorial-steps">
+                    <li><strong>Week 1 - Days 1-3:</strong> Learn Section A only. Practice Phrase 1 alone for 2 days until smooth, then add Phrase 2. Use metronome at 40 BPM.</li>
+                    
+                    <li><strong>Week 1 - Days 4-7:</strong> Master Section A. Increase to 50 BPM. Play with tanpura drone. Focus on clean transitions between notes, especially Pa-Ma and Dha-Pa.</li>
+                    
+                    <li><strong>Week 2 - Days 1-4:</strong> Learn Section B (Antara). This goes into higher octave (Sa') - exciting! Practice separately first, then connect with Section A.</li>
+                    
+                    <li><strong>Week 2 - Days 5-7:</strong> Play complete composition: A-B-A (repeat Section A at end). Add tabla recording at 50 BPM teen taal. Record yourself!</li>
+                    
+                    <li><strong>Week 3+:</strong> Add expression - gentle volume swells, slight pauses before sam. Gradually increase to 60 BPM. Try adding simple meend between Ga-Ma and Pa-Dha.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="composition-card">
+            <h2 class="composition-title">💡 Practice Tips & Techniques</h2>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">🎯</div>
+                    <div class="tip-title">Master in Chunks</div>
+                    <div class="tip-content">Learn one phrase at a time. Don't move forward until current phrase is smooth. Like learning tabla bol by bol before full composition.</div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">🐌</div>
+                    <div class="tip-title">Slower is Faster</div>
+                    <div class="tip-content">Start at 40 BPM even if it feels too slow. Perfect technique at slow speed = clean playing at any speed. Speed comes naturally.</div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">🎤</div>
+                    <div class="tip-title">Sing First</div>
+                    <div class="tip-content">Before playing, sing the melody with sargam. Your tabla training included this! Internalize the tune, then transfer to fingers.</div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">📱</div>
+                    <div class="tip-title">Record Everything</div>
+                    <div class="tip-content">Record your daily practice. Listen back. You'll catch mistakes you miss while playing. Celebrate progress over weeks!</div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">🥁</div>
+                    <div class="tip-title">Play With Tabla</div>
+                    <div class="tip-content">Use iTabla app or recordings in teen taal at 50 BPM. Feel the dialogue between melody and rhythm. This is where you shine!</div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-icon">⏰</div>
+                    <div class="tip-title">15 Minutes Daily</div>
+                    <div class="tip-content">Better than 2-hour weekend sessions. Consistent daily practice builds muscle memory. Same principle as your tabla sadhana.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="motivation-quote">
+            <p>"रियाज़ में कोई शॉर्टकट नहीं है"</p>
+            <p>"There are no shortcuts in riyaz"</p>
+            <div class="author">- Every Ustad, Ever 😊</div>
+        </div>
+        
+        <div class="composition-card">
+            <h2 class="composition-title">🎵 Technical Notes</h2>
+            
+            <div style="padding: 20px; background: #f8f9fa; border-radius: 10px; margin: 15px 0;">
+                <h4 style="color: #667eea; margin-bottom: 15px;">Hand Positions:</h4>
+                <ul style="list-style: none; padding-left: 0; color: #555; line-height: 2;">
+                    <li>✓ <strong>Sa (Sadaj):</strong> Usually open string or first fret, depending on tuning</li>
+                    <li>✓ <strong>Re (Rishabh):</strong> Index finger, 2nd fret area</li>
+                    <li>✓ <strong>Ga (Gandhar):</strong> Middle finger, 4th fret area</li>
+                    <li>✓ <strong>Ma (Madhyam):</strong> Ring finger, 5th fret area</li>
+                    <li>✓ <strong>Pa (Pancham):</strong> Usually open string (chikari)</li>
+                    <li>✓ <strong>Dha (Dhaivat):</strong> Index finger in upper register</li>
+                    <li>✓ <strong>Ni (Nishad):</strong> Middle finger in upper register</li>
+                    <li>✓ <strong>Sa' (Upper Sa):</strong> 12th fret equivalent or string pull</li>
+                </ul>
+            </div>
+            
+            <div style="padding: 20px; background: #fff9e6; border-radius: 10px; margin: 15px 0;">
+                <h4 style="color: #f59e0b; margin-bottom: 15px;">Common Mistakes to Avoid:</h4>
+                <ul style="list-style: none; padding-left: 0; color: #555; line-height: 2;">
+                    <li>❌ Rushing through phrases - respect the pause (-)  marks!</li>
+                    <li>❌ Inconsistent mizrab angle - keep it uniform</li>
+                    <li>❌ Not returning exactly to Sa - use tanpura to check pitch</li>
+                    <li>❌ Tension in left hand - stay relaxed, especially in upper register</li>
+                    <li>❌ Ignoring taal structure - sam (X) is sacred!</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="composition-card">
+            <h2 class="composition-title">🎯 Milestones & Progression</h2>
+            
+            <div style="padding: 20px; line-height: 2; color: #555;">
+                <p style="margin-bottom: 15px;"><strong style="color: #667eea;">Week 1 Goal:</strong> Play Section A smoothly at 45 BPM without mistakes. Know it from memory.</p>
+                
+                <p style="margin-bottom: 15px;"><strong style="color: #667eea;">Week 2 Goal:</strong> Complete piece at 50 BPM. Can play along with tabla recording.</p>
+                
+                <p style="margin-bottom: 15px;"><strong style="color: #667eea;">Week 3 Goal:</strong> Add musicality - dynamics, feeling. Speed up to 55-60 BPM.</p>
+                
+                <p style="margin-bottom: 15px;"><strong style="color: #667eea;">Week 4 Goal:</strong> Performance ready! Record and share with friends/guru.</p>
+                
+                <p style="margin-top: 25px; padding: 20px; background: #e0f2fe; border-radius: 10px;">
+                    <strong style="color: #0369a1;">After Mastering This:</strong> You'll have built finger strength, taal coordination, clean technique, and most importantly - the confidence and joy of playing a complete piece! You're ready for more complex compositions and raag exploration.
+                </p>
+            </div>
+        </div>
+        
+        <div class="tabla-connection" style="padding: 30px;">
+            <h4>🥁 Your Tabla Advantage in This Piece</h4>
+            <p style="margin-bottom: 10px;"><strong>Structure Recognition:</strong> You immediately recognize the teen taal structure (X 2 0 3). Most beginners struggle with this!</p>
+            
+            <p style="margin-bottom: 10px;"><strong>Rhythmic Accuracy:</strong> Your internal metronome from tabla means you'll play this more rhythmically accurate than typical beginners.</p>
+            
+            <p style="margin-bottom: 10px;"><strong>Accompaniment Understanding:</strong> You know where tabla fills happen, so you naturally leave space in the melody.</p>
+            
+            <p style="margin-bottom: 10px;"><strong>Taal Variations:</strong> Once comfortable, try adapting this to jhaptaal (10 beats) or rupak (7 beats) - something you can do easily because of your tabla background!</p>
+            
+            <p style="margin-top: 15px; font-style: italic; color: #f57f17;">
+                "A tabla player learning sitar is like a drummer learning guitar - the rhythm is already there, now add melody!" 🎵
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Practice tracking functionality
+        let practiceData = JSON.parse(localStorage.getItem('sitarPractice') || '{}');
+        
+        function initializeCalendar() {
+            const calendar = document.getElementById('practice-calendar');
+            const today = new Date();
+            
+            for (let i = 13; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                
+                const cell = document.createElement('div');
+                cell.className = 'day-cell';
+                cell.textContent = date.getDate();
+                cell.dataset.date = dateStr;
+                
+                if (practiceData[dateStr]) {
+                    cell.classList.add('practiced');
+                    cell.title = `Practiced: ${practiceData[dateStr]} min`;
+                }
+                
+                calendar.appendChild(cell);
+            }
+        }
+        
+        function markPracticeToday() {
+            const today = new Date().toISOString().split('T')[0];
+            const minutes = parseInt(document.getElementById('practice-minutes').value) || 15;
+            
+            practiceData[today] = (practiceData[today] || 0) + minutes;
+            localStorage.setItem('sitarPractice', JSON.stringify(practiceData));
+            
+            updateStats();
+            
+            // Refresh calendar
+            document.getElementById('practice-calendar').innerHTML = '';
+            initializeCalendar();
+            
+            // Show encouragement
+            alert(`🎉 Great job! ${minutes} minutes logged for today. Keep the streak alive!`);
+            document.getElementById('practice-minutes').value = '';
+        }
+        
+        function updateStats() {
+            // Calculate streak
+            let streak = 0;
+            const today = new Date();
+            
+            for (let i = 0; i < 365; i++) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                
+                if (practiceData[dateStr]) {
+                    streak++;
+                } else {
+                    break;
+                }
+            }
+            
+            // Total practices and minutes
+            const totalPractices = Object.keys(practiceData).length;
+            const totalMinutes = Object.values(practiceData).reduce((a, b) => a + b, 0);
+            
+            document.getElementById('streak-days').textContent = streak;
+            document.getElementById('total-practices').textContent = totalPractices;
+            document.getElementById('minutes-practiced').textContent = totalMinutes;
+        }
+        
+        // Initialize on load
+        initializeCalendar();
+        updateStats();
+    </script>
+</body>
+</html>

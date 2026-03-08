@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitar Learning Challenges - From Tabla to Sitar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .level-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .level-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .level-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .level-btn.active {
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .challenges-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .challenge-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .challenge-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+        
+        .challenge-title {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .challenge-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        
+        .badge-week {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .badge-month {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .badge-ongoing {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .challenge-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .tabla-connection {
+            background: #fff9c4;
+            border-left: 4px solid #fbc02d;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+        
+        .tabla-connection strong {
+            color: #f57f17;
+        }
+        
+        .practice-tips {
+            margin-top: 15px;
+        }
+        
+        .practice-tips h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+        
+        .practice-tips ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .practice-tips li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+            font-size: 0.95em;
+        }
+        
+        .practice-tips li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+        
+        .progress-tracker {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .checkbox-wrapper label {
+            cursor: pointer;
+            color: #666;
+            user-select: none;
+        }
+        
+        .completed {
+            opacity: 0.6;
+        }
+        
+        .completed .challenge-title {
+            text-decoration: line-through;
+        }
+        
+        .stats {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-item p {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 Sitar Learning Journey</h1>
+            <p>Building on your Tabla mastery</p>
+        </div>
+        
+        <div class="stats" id="stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 id="completed-count">0</h3>
+                    <p>Completed</p>
+                </div>
+                <div class="stat-item">
+                    <h3 id="total-count">0</h3>
+                    <p>Total Challenges</p>
+                </div>
+                <div class="stat-item">
+                    <h3 id="progress-percent">0%</h3>
+                    <p>Progress</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="level-selector">
+            <button class="level-btn active" onclick="filterLevel('all')">All Challenges</button>
+            <button class="level-btn" onclick="filterLevel('beginner')">Beginner</button>
+            <button class="level-btn" onclick="filterLevel('intermediate')">Intermediate</button>
+            <button class="level-btn" onclick="filterLevel('advanced')">Advanced</button>
+        </div>
+        
+        <div class="challenges-grid" id="challenges"></div>
+    </div>
+
+    <script>
+        const challenges = [
+            {
+                id: 1,
+                level: 'beginner',
+                title: 'Instrument Anatomy Mastery',
+                duration: 'Week 1',
+                description: 'Learn all parts of the sitar - main strings (baj tar), sympathetic strings (tarab), frets (pardas), bridge (jawari), and tuning pegs. Understand how each component affects the sound.',
+                tablaConnection: 'Just as you know every part of tabla (pudi, syahi, gatta), knowing your sitar intimately is foundational.',
+                tips: [
+                    'Spend 20 minutes daily identifying and touching each part',
+                    'Watch videos on jawari maintenance',
+                    'Learn the names in both Hindi and English'
+                ]
+            },
+            {
+                id: 2,
+                level: 'beginner',
+                title: 'Sitting Posture & Mizrab Technique',
+                duration: 'Week 1-2',
+                description: 'Master the cross-legged sitting position with sitar resting on your left foot. Learn to hold and use the mizrab (wire plectrum) on your index finger with proper angle and pressure.',
+                tablaConnection: 'Your tabla posture discipline transfers here - stability and comfort enable hours of practice.',
+                tips: [
+                    'Practice sitting position without sitar for 10 minutes',
+                    'Start with gentle mizrab strokes on open strings',
+                    'Record yourself to check posture from side angle'
+                ]
+            },
+            {
+                id: 3,
+                level: 'beginner',
+                title: 'Sa-Pa Meend (Basic Pull)',
+                duration: 'Week 2-3',
+                description: 'Master the fundamental meend (pulling/bending the string) between Sa and Pa. This is the signature sound of sitar - learn to pull smoothly and return accurately to pitch.',
+                tablaConnection: 'Think of meend like the slide between bols in tabla - smooth transitions matter. Your sense of pitch from tabla singing helps here.',
+                tips: [
+                    'Start with slow pulls, focus on smooth motion',
+                    'Use a tuner app to verify you reach exact Pa',
+                    'Practice 10 times daily, gradually increase speed'
+                ]
+            },
+            {
+                id: 4,
+                level: 'beginner',
+                title: 'Basic Alankars in Bilawal',
+                duration: 'Week 3-4',
+                description: 'Learn simple alankars (musical exercises) in Bilawal thaat using Sa Re Ga Ma Pa patterns. Focus on clean notes and steady rhythm.',
+                tablaConnection: 'These are like your tabla palta (exercises). Your ability to maintain kayda patterns will help with steady practice.',
+                tips: [
+                    'Start at slowest speed, use metronome at 40 bpm',
+                    'Practice ascending and descending separately first',
+                    'Coordinate with simple teen taal claps'
+                ]
+            },
+            {
+                id: 5,
+                level: 'beginner',
+                title: 'Left Hand Finger Independence',
+                duration: 'Ongoing (Daily)',
+                description: 'Develop strength and independence in your left-hand fingers for pressing strings. Each finger needs to work independently for complex phrases.',
+                tablaConnection: 'Similar to developing finger independence for complex tabla compositions - daily targeted practice builds muscle memory.',
+                tips: [
+                    '5-minute finger exercises on each string daily',
+                    'Practice holding notes steady without buzzing',
+                    'Gradually increase pressure control'
+                ]
+            },
+            {
+                id: 6,
+                level: 'intermediate',
+                title: 'Raag Yaman Foundation',
+                duration: 'Month 2-3',
+                description: 'Learn Raag Yaman thoroughly - aroh, avaroh, pakad, and simple compositions. This is often the first raag taught on sitar.',
+                tablaConnection: 'You already know Yaman from tabla accompaniment! Now express it melodically. Your understanding of the raag structure gives you a huge advantage.',
+                tips: [
+                    'Sing the raag before playing - use your tabla training',
+                    'Learn one traditional bandish in teen taal',
+                    'Practice slow (vilambit) alap daily for 15 minutes'
+                ]
+            },
+            {
+                id: 7,
+                level: 'intermediate',
+                title: 'Jhala Technique',
+                duration: 'Month 3-4',
+                description: 'Master jhala - the rhythmic striking of chikari (drone strings) with main melody. This creates the characteristic driving rhythm of sitar.',
+                tablaConnection: 'This is where your tabla rhythm mastery shines! Jhala patterns mirror tabla bols. Think of chikari as your "dha" keeping time.',
+                tips: [
+                    'Start with simple Sa-Pa jhala at slow speed',
+                    'Maintain consistent chikari rhythm (like tabla bol consistency)',
+                    'Build up to teen taal and rupak taal jhala'
+                ]
+            },
+            {
+                id: 8,
+                level: 'intermediate',
+                title: 'Meend Variations & Gamak',
+                duration: 'Month 4-5',
+                description: 'Learn different types of meend (simple, oscillating, group) and gamak (continuous oscillations). These add expressiveness to your playing.',
+                tablaConnection: 'Like mastering different types of "dha" in tabla - each has its character and usage. Your subtle control from tabla helps.',
+                tips: [
+                    'Practice slow oscillating meends for tone control',
+                    'Record and listen - ensure even oscillations',
+                    'Apply to phrases in Yaman and Bhairav'
+                ]
+            },
+            {
+                id: 9,
+                level: 'intermediate',
+                title: 'Raag Bhairavi Exploration',
+                duration: 'Month 5-6',
+                description: 'Learn Raag Bhairavi with its flat notes and emotional depth. Practice transitioning between raags.',
+                tablaConnection: 'You\'ve accompanied Bhairavi countless times - now internalize its feeling through your fingers.',
+                tips: [
+                    'Compare with Yaman to understand flat vs sharp notes',
+                    'Learn traditional compositions in medium tempo',
+                    'Practice mood transitions between raags'
+                ]
+            },
+            {
+                id: 10,
+                level: 'intermediate',
+                title: 'Taan Patterns & Layakari',
+                duration: 'Month 6-8',
+                description: 'Develop speed through taan practice (fast melodic passages). Learn to play in different layas (rhythmic speeds) while maintaining clarity.',
+                tablaConnection: 'Your tabla layakari expertise is directly transferable! You already understand tihai, chakradar patterns - now apply melodically.',
+                tips: [
+                    'Start taans at half-speed with metronome',
+                    'Practice sapaat (straight), koot (broken), and mishra taans',
+                    'Coordinate with tabla recordings in different speeds'
+                ]
+            },
+            {
+                id: 11,
+                level: 'advanced',
+                title: 'Raag Development & Alap',
+                duration: 'Month 8+',
+                description: 'Master the art of raag development through alap (slow, improvised introduction without rhythm). Learn to build raag systematically from lower to higher octaves.',
+                tablaConnection: 'This is like tabla solo development - building from slow exposition to energetic climax. Your sense of progression helps here.',
+                tips: [
+                    'Study recordings of Ustad Vilayat Khan\'s alaps',
+                    'Practice minimum 20-minute alap sessions daily',
+                    'Focus on one raag at a time for deep exploration'
+                ]
+            },
+            {
+                id: 12,
+                level: 'advanced',
+                title: 'Complex Raag Systems',
+                duration: 'Month 10+',
+                description: 'Learn raags like Marwa, Puriya Dhanashri, Shree, and other complex raags with unique characteristics and challenging intonation.',
+                tablaConnection: 'Your experience accompanying these raags gives you the roadmap - you know their structure and mood.',
+                tips: [
+                    'One raag per month for deep mastery',
+                    'Learn from multiple gharana interpretations',
+                    'Practice with tanpura for perfect intonation'
+                ]
+            },
+            {
+                id: 13,
+                level: 'advanced',
+                title: 'Accompaniment Understanding',
+                duration: 'Ongoing',
+                description: 'Learn to play with tabla, understanding the dialogue between sitar and tabla. Practice different taal compositions.',
+                tablaConnection: 'Perfect synergy! You understand tabla from inside - now learn to complement it from the melodic side. This is your unique strength!',
+                tips: [
+                    'Play with tabla recordings or friends',
+                    'Practice sawal-jawab (question-answer) phrases',
+                    'Learn to leave space for tabla solos'
+                ]
+            },
+            {
+                id: 14,
+                level: 'advanced',
+                title: 'Gharana Style Study',
+                duration: 'Ongoing',
+                description: 'Study different sitar gharanas - Imdadkhani, Vilayat Khan, Ravi Shankar traditions. Understand stylistic differences in approach, tone, and technique.',
+                tablaConnection: 'Just as tabla has different gharanas (Delhi, Ajrada, Punjab), sitar traditions vary. Your gharana knowledge helps you appreciate these nuances.',
+                tips: [
+                    'Listen analytically to masters from each gharana',
+                    'Note differences in meend style, taan patterns',
+                    'Choose a gharana that resonates with you'
+                ]
+            },
+            {
+                id: 15,
+                level: 'advanced',
+                title: 'Performance & Jugalbandi',
+                duration: 'Year 2+',
+                description: 'Develop stage presence and learn jugalbandi (duet) with tabla players. Create your own compositions and improvisations.',
+                tablaConnection: 'You understand the tabla side of jugalbandi perfectly - now balance it from sitar. Your collaborative experience is invaluable.',
+                tips: [
+                    'Start with informal performances for friends',
+                    'Collaborate with tabla students/players',
+                    'Record and review your performances'
+                ]
+            }
+        ];
+
+        let currentFilter = 'all';
+        let completedChallenges = new Set();
+
+        function loadProgress() {
+            const saved = localStorage.getItem('sitarProgress');
+            if (saved) {
+                completedChallenges = new Set(JSON.parse(saved));
+            }
+        }
+
+        function saveProgress() {
+            localStorage.setItem('sitarProgress', JSON.stringify([...completedChallenges]));
+        }
+
+        function renderChallenges() {
+            const container = document.getElementById('challenges');
+            const filtered = currentFilter === 'all' 
+                ? challenges 
+                : challenges.filter(c => c.level === currentFilter);
+            
+            container.innerHTML = filtered.map(challenge => {
+                const isCompleted = completedChallenges.has(challenge.id);
+                return `
+                    <div class="challenge-card ${isCompleted ? 'completed' : ''}" data-level="${challenge.level}">
+                        <div class="challenge-header">
+                            <div>
+                                <h3 class="challenge-title">${challenge.title}</h3>
+                                <span class="challenge-badge badge-${challenge.duration.toLowerCase().includes('week') ? 'week' : challenge.duration.toLowerCase().includes('month') ? 'month' : 'ongoing'}">
+                                    ${challenge.duration}
+                                </span>
+                            </div>
+                        </div>
+                        <p class="challenge-description">${challenge.description}</p>
+                        <div class="tabla-connection">
+                            <strong>🥁 Tabla Connection:</strong> ${challenge.tablaConnection}
+                        </div>
+                        <div class="practice-tips">
+                            <h4>Practice Tips:</h4>
+                            <ul>
+                                ${challenge.tips.map(tip => `<li>${tip}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="progress-tracker">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" 
+                                       id="challenge-${challenge.id}" 
+                                       ${isCompleted ? 'checked' : ''}
+                                       onchange="toggleChallenge(${challenge.id})">
+                                <label for="challenge-${challenge.id}">Mark as completed</label>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            updateStats();
+        }
+
+        function toggleChallenge(id) {
+            if (completedChallenges.has(id)) {
+                completedChallenges.delete(id);
+            } else {
+                completedChallenges.add(id);
+            }
+            saveProgress();
+            renderChallenges();
+        }
+
+        function filterLevel(level) {
+            currentFilter = level;
+            document.querySelectorAll('.level-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            renderChallenges();
+        }
+
+        function updateStats() {
+            const total = challenges.length;
+            const completed = completedChallenges.size;
+            const percent = Math.round((completed / total) * 100);
+            
+            document.getElementById('completed-count').textContent = completed;
+            document.getElementById('total-count').textContent = total;
+            document.getElementById('progress-percent').textContent = percent + '%';
+        }
+
+        loadProgress();
+        renderChallenges();
+    </script>
+</body>
+</html>

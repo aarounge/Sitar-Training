@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitar Learning Journey - Complete Resource Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border-radius: 25px;
+            padding: 60px 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 4em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+        
+        .hero .subtitle {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+        
+        .hero p {
+            font-size: 1.2em;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .section-header {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .section-header h2 {
+            color: #1e293b;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        .section-header p {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            color: #1e293b;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .card-subtitle {
+            color: #f59e0b;
+            font-size: 1em;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .card-description {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+        
+        .card-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .meta-badge {
+            background: #f0f9ff;
+            color: #0369a1;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        .meta-badge.time {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .meta-badge.level {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .card-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.05em;
+            transition: all 0.3s;
+        }
+        
+        .card-button:hover {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            transform: scale(1.05);
+        }
+        
+        .tabla-connection {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 3px solid #f59e0b;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .tabla-connection h3 {
+            color: #92400e;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .tabla-connection h3:before {
+            content: "🥁 ";
+        }
+        
+        .tabla-connection p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.15em;
+        }
+        
+        .category-divider {
+            text-align: center;
+            margin: 50px 0 30px 0;
+        }
+        
+        .category-divider h2 {
+            color: white;
+            font-size: 2.5em;
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            padding: 15px 40px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .footer {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 50px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .footer h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .footer p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 1.1em;
+        }
+        
+        .progress-path {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .progress-path h3 {
+            color: #1e293b;
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .path-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .path-step {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border-left: 5px solid #f59e0b;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            color: #1e293b;
+            margin-bottom: 5px;
+            font-size: 1.3em;
+        }
+        
+        .step-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>🎵 Sitar Learning Journey</h1>
+            <div class="subtitle">Complete Resource Collection for Tabla Players</div>
+            <p>Welcome to your comprehensive sitar learning hub! Every resource here is specifically designed for musicians with tabla background, building on your existing rhythmic knowledge to accelerate your melodic mastery.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Months of Content</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Complete Resources</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Raags Covered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Topics Complete</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabla-connection">
+            <h3>Your Unique Advantage</h3>
+            <p>Every single resource on this page includes "Tabla Connections" - showing you exactly how concepts you already know from tabla (gharanas, bols, kayda, tihai, layakari) map directly to sitar theory and technique. You're not starting from zero - you're translating your existing expertise from rhythm to melody!</p>
+        </div>
+
+        <div class="progress-path">
+            <h3>🗺️ Suggested Learning Path</h3>
+            <div class="path-steps">
+                <div class="path-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Start Here: Learning Challenges</h4>
+                        <p>Get the big picture with 15 progressive challenges from beginner to advanced</p>
+                    </div>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Bilawal Alankars Plan</h4>
+                        <p>4-week structured plan to master your foundational scale exercises</p>
+                    </div>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>First Composition: Prabhat Raga</h4>
+                        <p>Learn your first complete, beautiful piece to stay motivated</p>
+                    </div>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Theory Foundation</h4>
+                        <p>Dive into Composition Sections & Thaat System while practicing</p>
+                    </div>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>12-Month Theory Course</h4>
+                        <p>Deep dive into complete melodic theory alongside your practice</p>
+                    </div>
+                </div>
+                <div class="path-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Performance Ready: Open Mic Piece</h4>
+                        <p>Polish your showpiece and share your music with the world!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-divider">
+            <h2>📚 Theory & Understanding</h2>
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-card" onclick="window.location.href='complete-theory-full-course.html'">
+                <div class="card-icon">📖</div>
+                <div class="card-title">Complete 12-Month Theory Course</div>
+                <div class="card-subtitle">From Swar to Raag Mastery - FULL VERSION</div>
+                <div class="card-description">
+                    Complete university-level curriculum with ALL 12 months covered. Nothing skipped! Includes all 10 thaats, 50+ raags, time theory, jati system, vakra movements, ornamentation, performance structure, and rasa theory. Every topic systematically explained for tabla players.
+                </div>
+                <div class="card-meta">
+                    <span class="meta-badge">Complete Course</span>
+                    <span class="meta-badge time">12 Months</span>
+                    <span class="meta-badge level">All Levels</span>
+                </div>
+                <a href="complete-theory-full-course.html" class="card-button">Start Learning →</a>
+            </div>
+
+            <div class="resource-card" onclick="window.location.href='sitar-theory-complete-plan.html'">
+                <div class="card-icon">🎯</div>
+                <div class="card-title">Thaat System & Theory Overview</div>
+                <div class="card-subtitle">What is a Thaat?</div>
+                <div class="card-description">
+                    Complete explanation of the thaat system with all 10 thaats detailed. Learn how Bilawal, Kalyan, Kafi, Bhairav, and others organize the raag system. Includes comparison tables and your 12-month learning roadmap.
+                </div>
+                <div class="card-meta">
+                    <span class="meta-badge">Essential Theory</span>
+                    <span class="meta-badge time">2-3 Hours</span>
+                    <span class="meta-badge level">Foundation</span>
+                </div>
+                <a href="sitar-theory-complete-plan.html" class="card-button">Explore Thaats →</a>
+            </div>
+
+            <div class="resource-card" onclick="window.location.href='composition-sections-explained.html'">
+                <div class="card-icon">🎼</div>
+                <div class="card-title">Composition Sections Guide</div>
+                <div class="card-subtitle">Sthayi, Antara & More</div>
+                <div class="card-description">
+                    Understand why compositions have sections and how they work. Detailed explanation of Sthayi (foundation), Antara (development), Sanchari, and Abhog - with direct comparisons to tabla composition structure you already know.
+                </div>
+                <div class="card-meta">
+                    <span class="meta-badge">Structure</span>
+                    <span class="meta-badge time">1 Hour</span>
+                    <span class="meta-badge level">Essential</span>
+                </div>
+                <a href="composition-sections-explained.html" class="card-button">Learn Structure →</a>
+            </div>
+        </div>
+
+        <div class="category-divider">
+            <h2>🎵 Practice & Technique</h2>
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-card" onclick="window.location.href='sitar-learning-challenges.html'">
+                <div class="card-icon">🏆</div>
+                <div class="card-title">15 Learning Challenges</div>
+                <div class="card-subtitle">Beginner to Advanced Roadmap</div>
+                <div class="card-description">
+                    Interactive challenge tracker with 15 progressive milestones. From instrument anatomy to performance jugalbandi. Each challenge includes tabla connections, practice tips, and duration estimates. Track your completion!
+                </div>
+                <div class="card-meta">
+                    <span class="meta-badge">Interactive</span>
+                    <span class="meta-badge time">Year 1-2</span>
+                    <span class="meta-badge level">All Levels</span>
+                </div>
+                <a href="sitar-learning-challenges.html" class="card-button">View Challenges →</a>
+            </div>
+
+            <div class="resource-card" onclick="window.location.href='bilawal-alankars-plan.html'">
+                <div class="card-icon">📅</div>
+                <div class="card-title">Bilawal Alankars 4-Week Plan</div>
+                <div class="card-subtitle">Master Your Foundation Scale</div>
+                <div class="card-description">
+                    Detailed week-by-week plan to master basic alankars in Bilawal thaat. Day-by-day practice sessions, notation examples, common mistakes to avoid, and progression from 40 to 60 BPM. Your first systematic practice routine.
+                </div>
+                <div class="card-meta">
+                    <span class="meta-badge">Practice Plan</span>
+                    <span class="meta-badge time">4 Weeks</span>
+                    <span class="meta-badge level">Beginner</span>
+                </div>
+                <a href="bilawal-alankars-plan.html" class="card-button">Start Plan →</a>
+            </div>
+        </div>
+
+        <div class="category-divider">
+            <h2>🎭 Performance Pieces</h2>
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-card" onclick="window.location.href='prabhat-raga-composition.html'">
+                <div class="card-icon">🌅</div>
+                <div class="card-title">Prabhat Raga - First Composition</div>
+                <div class="card-subtitle">Morning Light Theme</div>
+                <div class="card-description">
+                    Your first complete sitar composition! Beautiful 2-section piece in Bilawal with teen taal structure. Includes practice tracker, week-by-week learning plan, technical notes, and milestone goals. Sounds impressive but achievable!
+                </div>
+                <div class="card-meta">
+                    <span class="meta-badge">Composition</span>
+                    <span class="meta-badge time">2-3 Weeks</span>
+                    <span class="meta-badge level">Beginner</span>
+                </div>
+                <a href="prabhat-raga-composition.html" class="card-button">Learn Piece →</a>
+            </div>
+
+            <div class="resource-card" onclick="window.location.href='open-mic-composition.html'">
+                <div class="card-icon">🎤</div>
+                <div class="card-title">Shaam-e-Safar - Open Mic Showpiece</div>
+                <div class="card-subtitle">Evening Journey (Yaman-based)</div>
+                <div class="card-description">
+                    3-minute performance piece designed to impress! Complete with alap intro, sthayi theme, antara development, jhala finale, and tihai ending. Includes 7-day preparation plan, performance timeline, and stage tips. Open mic ready!
+                </div>
+                <div class="card-meta">
+                    <span class="meta-badge">Performance</span>
+                    <span class="meta-badge time">1 Week</span>
+                    <span class="meta-badge level">Intermediate</span>
+                </div>
+                <a href="open-mic-composition.html" class="card-button">Prepare Performance →</a>
+            </div>
+        </div>
+
+        <div class="section-header" style="margin-top: 50px;">
+            <h2>🎯 How to Use This Hub</h2>
+            <p><strong>New to Sitar?</strong> Start with "15 Learning Challenges" to get the big picture, then dive into "Bilawal Alankars Plan" for your first month of structured practice.</p>
+            <p style="margin-top: 10px;"><strong>Want to understand theory?</strong> Begin with "Composition Sections Guide" and "Thaat System Overview," then progress to the complete 12-Month Theory Course.</p>
+            <p style="margin-top: 10px;"><strong>Ready to play music?</strong> Learn "Prabhat Raga" as your first piece, then work toward "Shaam-e-Safar" for performance.</p>
+            <p style="margin-top: 10px;"><strong>Pro Tip:</strong> Practice and theory should go hand-in-hand. Spend 70% time on technique/pieces, 30% on theory study.</p>
+        </div>
+
+        <div class="tabla-connection" style="margin-top: 40px;">
+            <h3>Why These Resources Work For You</h3>
+            <p><strong>Every resource here acknowledges your tabla expertise.</strong> You're not a "beginner musician" - you're an advanced rhythmic musician learning melodic expression. These materials leverage what you already know:</p>
+            <ul style="margin-top: 15px; padding-left: 25px; color: #555; line-height: 2;">
+                <li>Your understanding of taal, sam, and rhythmic cycles</li>
+                <li>Your knowledge of composition structure (theme, variation, development)</li>
+                <li>Your performance experience and stage presence</li>
+                <li>Your ear training from accompanying raags for years</li>
+                <li>Your discipline and practice methodology from tabla training</li>
+            </ul>
+            <p style="margin-top: 15px;"><strong>This isn't learning from scratch - it's translation from rhythm to melody.</strong> You'll progress faster than typical beginners because you're building on solid musical foundation!</p>
+        </div>
+
+        <div class="footer">
+            <h3>🌟 Your Journey Starts Here</h3>
+            <p>You have a complete, structured path from absolute beginner to confident performer. Every resource connects to your tabla knowledge. Practice daily, stay consistent, and enjoy the journey from rhythm to melody!</p>
+            <p style="margin-top: 15px; font-style: italic; color: #f59e0b; font-size: 1.2em;">
+                "From Dha to Sa, from beats to melody - your musical evolution continues!" 🎵
+            </p>
+        </div>
+    </div>
+</body>
+</html>

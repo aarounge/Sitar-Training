@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilawal Alankars - 4-Week Learning Plan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            color: #11998e;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .theory-box {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .theory-box h2 {
+            color: #11998e;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .theory-box p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        
+        .notes-display {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #0369a1;
+            letter-spacing: 3px;
+        }
+        
+        .week-container {
+            margin-bottom: 25px;
+        }
+        
+        .week-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px 15px 0 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .week-header:hover {
+            transform: translateY(-2px);
+            transition: transform 0.2s;
+        }
+        
+        .week-title {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        
+        .week-subtitle {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .toggle-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s;
+        }
+        
+        .week-header.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+        
+        .week-content {
+            background: white;
+            padding: 25px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .week-content.hidden {
+            display: none;
+        }
+        
+        .day-section {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .day-section:last-child {
+            border-bottom: none;
+        }
+        
+        .day-title {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .practice-session {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .session-title {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .duration-badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+        }
+        
+        .session-steps {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .session-steps li {
+            padding: 6px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+        
+        .session-steps li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #38ef7d;
+            font-weight: bold;
+        }
+        
+        .notation-box {
+            background: #fff9e6;
+            border: 2px dashed #fbbf24;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .notation-title {
+            color: #92400e;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .notation-line {
+            color: #451a03;
+            margin: 5px 0;
+            font-size: 1.05em;
+        }
+        
+        .tip-box {
+            background: #e0f2fe;
+            border-left: 4px solid #0ea5e9;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .tip-box strong {
+            color: #0369a1;
+        }
+        
+        .warning-box {
+            background: #fee2e2;
+            border-left: 4px solid #ef4444;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box strong {
+            color: #991b1b;
+        }
+        
+        .tabla-connection {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .tabla-connection strong {
+            color: #92400e;
+        }
+        
+        .progress-tracker {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .progress-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .progress-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .progress-item.completed {
+            background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%);
+            color: white;
+        }
+        
+        .progress-week {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .progress-check {
+            font-size: 2em;
+        }
+        
+        .resources-box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .resources-box h3 {
+            color: #11998e;
+            margin-bottom: 15px;
+        }
+        
+        .resources-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .resources-box li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+        }
+        
+        .resources-box li:before {
+            content: "📱";
+            position: absolute;
+            left: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .progress-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 Bilawal Alankars Mastery</h1>
+            <p>A 4-week structured plan for tabla players learning sitar. Bilawal is the foundational thaat (scale) in Hindustani music - equivalent to the Western major scale. This plan builds your finger technique, rhythm coordination, and melodic foundation.</p>
+        </div>
+        
+        <div class="theory-box">
+            <h2>Understanding Bilawal Thaat</h2>
+            <p><strong>Scale Structure:</strong> Bilawal uses all natural (shuddha) notes with no flats or sharps.</p>
+            <div class="notes-display">
+                Sa Re Ga Ma Pa Dha Ni Sa'
+            </div>
+            <p>In Western terms: C D E F G A B C</p>
+            <p><strong>Why Bilawal First?</strong> It's the most straightforward scale with no altered notes, making it perfect for building clean technique and muscle memory. Think of it as the "sa sa dhin dhin" of sitar - fundamental and essential.</p>
+            
+            <div class="tabla-connection">
+                <strong>🥁 Tabla Connection:</strong> Just as you practiced countless hours of basic bols (Ta, Dha, Dhin) before complex compositions, these alankars are your foundational "bols" on sitar. Your discipline with tabla palta transfers directly here!
+            </div>
+        </div>
+        
+        <div class="progress-tracker">
+            <h3 style="color: #11998e; margin-bottom: 10px;">Track Your Progress</h3>
+            <p style="color: #666; font-size: 0.95em;">Click each week when completed</p>
+            <div class="progress-grid">
+                <div class="progress-item" onclick="toggleProgress(1)">
+                    <div class="progress-week">Week 1</div>
+                    <div class="progress-check">○</div>
+                </div>
+                <div class="progress-item" onclick="toggleProgress(2)">
+                    <div class="progress-week">Week 2</div>
+                    <div class="progress-check">○</div>
+                </div>
+                <div class="progress-item" onclick="toggleProgress(3)">
+                    <div class="progress-week">Week 3</div>
+                    <div class="progress-check">○</div>
+                </div>
+                <div class="progress-item" onclick="toggleProgress(4)">
+                    <div class="progress-week">Week 4</div>
+                    <div class="progress-check">○</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEK 1 -->
+        <div class="week-container">
+            <div class="week-header" onclick="toggleWeek(1)">
+                <div>
+                    <div class="week-title">Week 1: Foundation & Single-String Mastery</div>
+                    <div class="week-subtitle">Goal: Clean individual notes, proper mizrab technique, steady rhythm</div>
+                </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="week-content" id="week1">
+                
+                <div class="day-section">
+                    <div class="day-title">Day 1-2: Single Note Clarity</div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Session 1: Open String Practice</span>
+                            <span class="duration-badge">15 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Sit in proper posture, sitar on left foot, relaxed shoulders</li>
+                            <li>Practice striking Ma string (main playing string) with mizrab</li>
+                            <li>Focus: Even volume, consistent angle, clean tone</li>
+                            <li>Strike once per second - count "1, 2, 3, 4" mentally</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Session 2: Fret Pressing</span>
+                            <span class="duration-badge">20 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Find Sa (first note) on main string - press just before fret</li>
+                            <li>Press Re, Ga, Ma - one at a time, hold for 5 seconds each</li>
+                            <li>Check: No buzzing, clean sound, finger perpendicular to string</li>
+                            <li>Repeat 10 times for each note</li>
+                        </ul>
+                        
+                        <div class="tip-box">
+                            <strong>Tip:</strong> Press with fingertip just behind fret (not on top). Use minimal pressure - just enough to get clean sound. Relax between presses.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="day-section">
+                    <div class="day-title">Day 3-4: Sa Re Ga Ma (Ascending)</div>
+                    
+                    <div class="notation-box">
+                        <div class="notation-title">Alankar 1: Simple Ascent</div>
+                        <div class="notation-line">Sa Re Ga Ma | Pa Dha Ni Sa' ||</div>
+                        <div class="notation-line">Play each note twice at 40 BPM</div>
+                    </div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Morning Practice</span>
+                            <span class="duration-badge">25 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Set metronome/tabla app to 40 BPM, vilambit (slow) teen taal</li>
+                            <li>Play Sa (strike with mizrab), hold briefly, then Re</li>
+                            <li>Continue: Ga, Ma, Pa, Dha, Ni, Sa' (higher octave)</li>
+                            <li>Pause. Breathe. Repeat 5 times</li>
+                            <li>Focus on even gaps between notes</li>
+                        </ul>
+                        
+                        <div class="tabla-connection">
+                            <strong>🥁 Tabla Connection:</strong> This is like practicing "Ta Ti Ta Ti" at slow speed. You already know how to maintain steady tempo - apply that skill here!
+                        </div>
+                    </div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Evening Review</span>
+                            <span class="duration-badge">15 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Record yourself playing the alankar</li>
+                            <li>Listen back: Check rhythm consistency and note clarity</li>
+                            <li>Identify any unclear notes and practice those transitions</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="day-section">
+                    <div class="day-title">Day 5-7: Sa' Ni Dha Pa (Descending)</div>
+                    
+                    <div class="notation-box">
+                        <div class="notation-title">Alankar 2: Simple Descent</div>
+                        <div class="notation-line">Sa' Ni Dha Pa | Ma Ga Re Sa ||</div>
+                    </div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Full Practice Routine</span>
+                            <span class="duration-badge">30 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Warm up: Ascending alankar 3 times (from Day 3-4)</li>
+                            <li>New: Descending from Sa' back to Sa</li>
+                            <li>Play slowly, ensure left hand relaxes between notes</li>
+                            <li>Combine: Ascend then descend without stopping</li>
+                            <li>Repeat complete cycle 5 times</li>
+                        </ul>
+                        
+                        <div class="warning-box">
+                            <strong>Common Mistake:</strong> Rushing! Your tabla training helps you avoid this. Stay locked to the beat. Quality over speed.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Week 1 Success Criteria:</strong> By end of week, you should play Sa-Re-Ga-Ma-Pa-Dha-Ni-Sa'-Ni-Dha-Pa-Ma-Ga-Re-Sa smoothly at 40 BPM with clean notes and no rhythm breaks.
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEK 2 -->
+        <div class="week-container">
+            <div class="week-header" onclick="toggleWeek(2)">
+                <div>
+                    <div class="week-title">Week 2: Pattern Variations & Speed Building</div>
+                    <div class="week-subtitle">Goal: Learn 3 classic alankar patterns, increase to 50 BPM</div>
+                </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="week-content" id="week2">
+                
+                <div class="day-section">
+                    <div class="day-title">Day 1-2: Two-Note Patterns</div>
+                    
+                    <div class="notation-box">
+                        <div class="notation-title">Alankar 3: Pairs</div>
+                        <div class="notation-line">Sa Re | Re Ga | Ga Ma | Ma Pa ||</div>
+                        <div class="notation-line">Pa Dha | Dha Ni | Ni Sa' | Sa' Sa' ||</div>
+                        <div class="notation-line">Sa' Ni | Ni Dha | Dha Pa | Pa Ma ||</div>
+                        <div class="notation-line">Ma Ga | Ga Re | Re Sa | Sa Sa ||</div>
+                    </div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Pattern Learning</span>
+                            <span class="duration-badge">30 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Start at 40 BPM - one note per beat</li>
+                            <li>Ascending pairs: Sa-Re, Re-Ga, Ga-Ma, etc.</li>
+                            <li>Notice the overlap: each note appears twice</li>
+                            <li>Practice ascending 10 times, then descending 10 times</li>
+                            <li>Then combine without pause</li>
+                        </ul>
+                        
+                        <div class="tabla-connection">
+                            <strong>🥁 Tabla Connection:</strong> Similar to "Dha Dhin | Dhin Dha" patterns - overlapping elements. You're familiar with this concept!
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="day-section">
+                    <div class="day-title">Day 3-4: Three-Note Patterns</div>
+                    
+                    <div class="notation-box">
+                        <div class="notation-title">Alankar 4: Triplets</div>
+                        <div class="notation-line">Sa Re Ga | Re Ga Ma | Ga Ma Pa | Ma Pa Dha ||</div>
+                        <div class="notation-line">Pa Dha Ni | Dha Ni Sa' | Sa' Sa' Sa' ||</div>
+                        <div class="notation-line">Descending reverse pattern...</div>
+                    </div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Triplet Mastery</span>
+                            <span class="duration-badge">35 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Three-note groups moving up the scale</li>
+                            <li>Keep tempo steady - use metronome!</li>
+                            <li>Each group flows into the next smoothly</li>
+                            <li>Build finger independence and memory</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="day-section">
+                    <div class="day-title">Day 5-7: Speed Increase & Consolidation</div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Progressive Speed Work</span>
+                            <span class="duration-badge">40 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Day 5: Increase metronome to 45 BPM</li>
+                            <li>Practice all 4 alankars learned so far at new speed</li>
+                            <li>Day 6: Try 48 BPM if comfortable</li>
+                            <li>Day 7: Reach 50 BPM goal</li>
+                            <li>If struggling, stay at lower tempo - accuracy first!</li>
+                        </ul>
+                        
+                        <div class="tip-box">
+                            <strong>Speed Building Tip:</strong> Increase by only 2-3 BPM at a time. Just like tabla riyaz, patience builds technique. Speed comes from relaxation, not tension.
+                        </div>
+                    </div>
+                    
+                    <div class="notation-box">
+                        <div class="notation-title">Alankar 5: Four-Note Pattern (Bonus)</div>
+                        <div class="notation-line">Sa Re Ga Ma | Re Ga Ma Pa | Ga Ma Pa Dha ||</div>
+                        <div class="notation-line">Learn if Week 2 feels comfortable</div>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Week 2 Success Criteria:</strong> Comfortable with 4-5 different alankar patterns at 50 BPM. Smooth transitions between notes. Beginning to play without looking at fingers constantly.
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEK 3 -->
+        <div class="week-container">
+            <div class="week-header" onclick="toggleWeek(3)">
+                <div>
+                    <div class="week-title">Week 3: Rhythmic Integration & Teen Taal</div>
+                    <div class="week-subtitle">Goal: Play alankars in proper teen taal structure, coordinate with tabla</div>
+                </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="week-content" id="week3">
+                
+                <div class="day-section">
+                    <div class="day-title">Day 1-3: Teen Taal Structure</div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Taal Coordination</span>
+                            <span class="duration-badge">35 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Review teen taal: 16 beats (4+4+4+4)</li>
+                            <li>Play simple alankar with sama (beat 1) emphasis</li>
+                            <li>Sa should land on sama, complete phrase by next sama</li>
+                            <li>Use tabla app or recording in teen taal at 50 BPM</li>
+                            <li>Clap the taal while playing mentally first</li>
+                        </ul>
+                        
+                        <div class="tabla-connection">
+                            <strong>🥁 Tabla Gold!</strong> This is where your tabla degree shines! You intimately know teen taal structure. Now you're playing the melodic counterpart. Feel the sam, respect the structure.
+                        </div>
+                    </div>
+                    
+                    <div class="notation-box">
+                        <div class="notation-title">Teen Taal Alankar (16 beats)</div>
+                        <div class="notation-line">X - - - | 2 - - - | 0 - - - | 3 - - - ||</div>
+                        <div class="notation-line">Sa Re Ga Ma | Pa Dha Ni Sa' | Sa' Ni Dha Pa | Ma Ga Re Sa ||</div>
+                        <div class="notation-line">(1 note per beat = 16 beats total)</div>
+                    </div>
+                </div>
+                
+                <div class="day-section">
+                    <div class="day-title">Day 4-5: Doubling Speed (Dugun)</div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Dugun Practice</span>
+                            <span class="duration-badge">30 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Keep tabla at 50 BPM, but play 2 notes per beat</li>
+                            <li>This is dugun - double speed layakari</li>
+                            <li>Start with simple Sa-Re-Ga-Ma pattern</li>
+                            <li>Maintain clarity even at faster note rate</li>
+                        </ul>
+                        
+                        <div class="tip-box">
+                            <strong>Layakari Tip:</strong> You know dugun from tabla! The concept is identical. Subdivide beats clearly in your mind.
+                        </div>
+                    </div>
+                    
+                    <div class="notation-box">
+                        <div class="notation-title">Dugun Example (2 notes per beat)</div>
+                        <div class="notation-line">Sa-Re Ga-Ma Pa-Dha Ni-Sa' | Sa'-Ni Dha-Pa Ma-Ga Re-Sa ||</div>
+                        <div class="notation-line">(Now 32 notes in 16 beats)</div>
+                    </div>
+                </div>
+                
+                <div class="day-section">
+                    <div class="day-title">Day 6-7: Ektaal & Jhaptaal (Bonus)</div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Exploring Other Taals</span>
+                            <span class="duration-badge">25 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Try same alankars in ektaal (12 beats)</li>
+                            <li>Adapt patterns to fit taal structure</li>
+                            <li>Or jhaptaal (10 beats) - more challenging!</li>
+                            <li>This develops taal flexibility</li>
+                        </ul>
+                        
+                        <div class="tabla-connection">
+                            <strong>🥁 Advanced Integration:</strong> You can play tabla in multiple taals. Same flexibility applies to sitar! Experiment with fitting alankars into different taal frameworks.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Week 3 Success Criteria:</strong> Comfortable playing alankars in proper teen taal structure with sama awareness. Can play basic dugun. Feel rhythmic confidence growing.
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEK 4 -->
+        <div class="week-container">
+            <div class="week-header" onclick="toggleWeek(4)">
+                <div>
+                    <div class="week-title">Week 4: Refinement, Expression & Performance</div>
+                    <div class="week-subtitle">Goal: Add musicality, play from memory, record final performance</div>
+                </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="week-content" id="week4">
+                
+                <div class="day-section">
+                    <div class="day-title">Day 1-2: Dynamics & Expression</div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Adding Musicality</span>
+                            <span class="duration-badge">30 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Play alankars with volume variation (soft to loud)</li>
+                            <li>Emphasize sama with slightly stronger strike</li>
+                            <li>Experiment with slight pauses before returning to Sa</li>
+                            <li>Make it musical, not just mechanical exercise</li>
+                        </ul>
+                        
+                        <div class="tip-box">
+                            <strong>Expression Tip:</strong> Think of how tabla has bhari and khali (filled and empty) sections. Create similar light and shade in your sitar alankars.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="day-section">
+                    <div class="day-title">Day 3-4: Memory & Flow</div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Playing Without Notation</span>
+                            <span class="duration-badge">35 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Practice all learned alankars without looking at notes</li>
+                            <li>Close your eyes and feel the movements</li>
+                            <li>String together 3-4 different alankars in sequence</li>
+                            <li>Create your own variations based on patterns learned</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="notation-box">
+                        <div class="notation-title">Personal Composition Challenge</div>
+                        <div class="notation-line">Create your own alankar pattern using Bilawal notes</div>
+                        <div class="notation-line">Make it fit perfectly in teen taal (16 beats)</div>
+                        <div class="notation-line">Example: Sa Ga Re Ma | Ga Pa Ma Dha | Pa Ni Dha Sa' | etc.</div>
+                    </div>
+                </div>
+                
+                <div class="day-section">
+                    <div class="day-title">Day 5-6: Speed & Stamina</div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Final Speed Push</span>
+                            <span class="duration-badge">40 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Push tempo to 60 BPM if comfortable</li>
+                            <li>Practice for longer durations - build endurance</li>
+                            <li>10-minute continuous alankar sessions</li>
+                            <li>Notice any tension - stay relaxed</li>
+                        </ul>
+                        
+                        <div class="warning-box">
+                            <strong>Avoid Injury:</strong> Stop if fingers hurt. Sitar requires different muscles than tabla. Build gradually. Warm up and cool down.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="day-section">
+                    <div class="day-title">Day 7: Performance & Recording</div>
+                    
+                    <div class="practice-session">
+                        <div class="session-header">
+                            <span class="session-title">Final Showcase</span>
+                            <span class="duration-badge">45 min</span>
+                        </div>
+                        <ul class="session-steps">
+                            <li>Record yourself playing 5 different alankars</li>
+                            <li>Use tabla accompaniment (app or recording)</li>
+                            <li>Play as if performing - with confidence and musicality</li>
+                            <li>Listen back and celebrate your progress!</li>
+                            <li>Note areas for continued improvement</li>
+                        </ul>
+                        
+                        <div class="tabla-connection">
+                            <strong>🥁 Full Circle:</strong> Imagine accompanying yourself! You're now experiencing both sides of the melodic-rhythmic dialogue. This deepens your understanding of both instruments.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>Week 4 Success Criteria:</strong> Can play 5+ alankar patterns from memory at 60 BPM with proper taal structure. Notes are clean, rhythm is steady, musicality is developing. Ready to move to next challenge!
+                </div>
+            </div>
+        </div>
+
+        <!-- RESOURCES -->
+        <div class="resources-box">
+            <h3>Essential Resources & Tools</h3>
+            <ul>
+                <li><strong>iTanpura or Tanpura Droid:</strong> Electronic tanpura for drone accompaniment - tune to your sitar</li>
+                <li><strong>Metronome Plus or Soundbrenner:</strong> Precise metronome apps with tabla sounds</li>
+                <li><strong>iTabla Pro or Tabla Guru:</strong> Tabla accompaniment in different taals and speeds</li>
+                <li><strong>Voice Recorder:</strong> Daily recording essential for tracking progress</li>
+                <li><strong>Sargam Note Finder app:</strong> Helps identify notes on sitar</li>
+                <li><strong>YouTube Channels:</strong> Search "Sitar Alankars" for visual demonstrations</li>
+            </ul>
+        </div>
+
+        <div class="theory-box">
+            <h2>After Week 4: What's Next?</h2>
+            <p><strong>Immediate Next Steps:</strong></p>
+            <ul style="padding-left: 25px; color: #555; line-height: 1.8;">
+                <li>Apply same alankar patterns to other thaats (Kafi, Bhairav)</li>
+                <li>Increase speed to 80-100 BPM gradually over next month</li>
+                <li>Begin learning Raag Yaman using your alankar foundation</li>
+                <li>Start simple meend (string pulling) exercises between notes</li>
+                <li>Practice jhala technique on Sa-Pa alankars</li>
+            </ul>
+            
+            <div class="tabla-connection" style="margin-top: 15px;">
+                <strong>🥁 Your Unique Advantage:</strong> As a tabla player, you have perfect rhythmic sense. This allows you to progress faster than typical beginners. You can coordinate complex patterns more quickly. Use this advantage - but remember melody requires different patience than rhythm!
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleWeek(weekNum) {
+            const content = document.getElementById('week' + weekNum);
+            const header = event.currentTarget;
+            
+            content.classList.toggle('hidden');
+            header.classList.toggle('collapsed');
+        }
+
+        function toggleProgress(weekNum) {
+            const item = event.currentTarget;
+            item.classList.toggle('completed');
+            
+            const check = item.querySelector('.progress-check');
+            if (item.classList.contains('completed')) {
+                check.textContent = '✓';
+                saveProgress(weekNum, true);
+            } else {
+                check.textContent = '○';
+                saveProgress(weekNum, false);
+            }
+        }
+
+        function saveProgress(week, completed) {
+            const key = 'bilawal-week-' + week;
+            localStorage.setItem(key, completed);
+        }
+
+        function loadProgress() {
+            for (let i = 1; i <= 4; i++) {
+                const key = 'bilawal-week-' + i;
+                const completed = localStorage.getItem(key) === 'true';
+                if (completed) {
+                    const items = document.querySelectorAll('.progress-item');
+                    items[i-1].classList.add('completed');
+                    items[i-1].querySelector('.progress-check').textContent = '✓';
+                }
+            }
+        }
+
+        // Initialize
+        loadProgress();
+        
+        // Collapse all weeks initially except Week 1
+        document.getElementById('week2').classList.add('hidden');
+        document.getElementById('week3').classList.add('hidden');
+        document.getElementById('week4').classList.add('hidden');
+        
+        document.querySelectorAll('.week-header')[1].classList.add('collapsed');
+        document.querySelectorAll('.week-header')[2].classList.add('collapsed');
+        document.querySelectorAll('.week-header')[3].classList.add('collapsed');
+    </script>
+</body>
+</html>
