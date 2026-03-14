@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composition Sections - Tabla to Sitar Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #1e3a8a;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+        }
+        
+        .header .subtitle {
+            color: #3b82f6;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .header p {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .key-insight h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .key-insight p {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .comparison-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .comparison-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .side-header {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        
+        .tabla-side {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            color: white;
+        }
+        
+        .sitar-side {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+        }
+        
+        .side-header h3 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        
+        .section-block {
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .section-block:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #1e3a8a;
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-number {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 20px 0;
+        }
+        
+        .tabla-box {
+            background: #fee2e2;
+            border-left: 5px solid #dc2626;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .tabla-box h4 {
+            color: #991b1b;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+        
+        .tabla-box p, .tabla-box ul {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .sitar-box {
+            background: #d1fae5;
+            border-left: 5px solid #059669;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .sitar-box h4 {
+            color: #047857;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+        
+        .sitar-box p, .sitar-box ul {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .connection-box {
+            background: #fef3c7;
+            border: 3px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .connection-box h4 {
+            color: #d97706;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .connection-box p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+        
+        .example-notation {
+            background: #f8fafc;
+            border: 2px dashed #3b82f6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .notation-title {
+            color: #1e3a8a;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.1em;
+        }
+        
+        .notation-line {
+            color: #334155;
+            margin: 8px 0;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .why-box {
+            background: #e0e7ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .why-box h4 {
+            color: #3730a3;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .why-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .why-box li {
+            padding: 10px 0;
+            padding-left: 35px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .why-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+        
+        .visual-diagram {
+            background: white;
+            border: 3px solid #3b82f6;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .flow-chart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .flow-box {
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            min-width: 120px;
+        }
+        
+        .flow-sthayi {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 2px solid #3b82f6;
+        }
+        
+        .flow-antara {
+            background: #dcfce7;
+            color: #166534;
+            border: 2px solid #22c55e;
+        }
+        
+        .flow-sanchari {
+            background: #fef3c7;
+            color: #92400e;
+            border: 2px solid #f59e0b;
+        }
+        
+        .flow-abhog {
+            background: #fce7f3;
+            color: #9f1239;
+            border: 2px solid #f43f5e;
+        }
+        
+        .flow-arrow {
+            font-size: 2em;
+            color: #64748b;
+        }
+        
+        .practical-tip {
+            background: #f0fdfa;
+            border-left: 5px solid #14b8a6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .practical-tip h4 {
+            color: #115e59;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .practical-tip p {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            .comparison-header {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 Composition Sections Explained</h1>
+            <div class="subtitle">Understanding Sthayi, Antara & More</div>
+            <p>A complete guide for tabla players learning sitar - see how melodic composition structure mirrors what you already know from tabla!</p>
+        </div>
+        
+        <div class="key-insight">
+            <h2>🔑 The Big Picture</h2>
+            <p><strong>You already understand this!</strong> Just as tabla compositions have structured sections (theme, development, variations, conclusion), sitar and vocal compositions have parallel sections. Think of it as the melodic equivalent of your tabla kaida or gat structure. The purpose is the same: organized musical storytelling with clear beginning, development, and resolution.</p>
+        </div>
+
+        <div class="comparison-card">
+            <div class="comparison-header">
+                <div class="side-header tabla-side">
+                    <h3>🥁 Tabla Structure</h3>
+                    <p>You Know This!</p>
+                </div>
+                <div class="side-header sitar-side">
+                    <h3>🎵 Sitar/Vocal Structure</h3>
+                    <p>New Territory</p>
+                </div>
+            </div>
+
+            <!-- SECTION 1: STHAYI -->
+            <div class="section-block">
+                <div class="section-title">
+                    <span class="section-number">1</span>
+                    <span>Sthāyī (स्थायी) - The Foundation</span>
+                </div>
+                
+                <div class="comparison-grid">
+                    <div class="tabla-box">
+                        <h4>🥁 Tabla Equivalent: Theme/Mukhra</h4>
+                        <p>In tabla compositions like kaida or gat:</p>
+                        <ul style="list-style: none; padding-left: 15px; margin-top: 10px;">
+                            <li>• The main theme you start with</li>
+                            <li>• The "Dha Dhin Dhin Dha" that defines the composition</li>
+                            <li>• Always returns to sam cleanly</li>
+                            <li>• What you come back to after variations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitar-box">
+                        <h4>🎵 Sitar: The Home Section</h4>
+                        <p>The foundational melodic phrase:</p>
+                        <ul style="list-style: none; padding-left: 15px; margin-top: 10px;">
+                            <li>• Stays in lower/middle octave (Sa to Sa')</li>
+                            <li>• Establishes the raag character</li>
+                            <li>• Always ends on Sa or dominant note</li>
+                            <li>• Repeated after every other section</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="connection-box">
+                    <h4>🔗 The Connection</h4>
+                    <p>Sthayi is your "home base" melodically, just like your tabla theme is rhythmically. It's where the composition begins and what you return to. In tabla, you play the theme → variation → theme. In sitar: Sthayi → Antara → Sthayi. <strong>Same structural logic!</strong></p>
+                </div>
+                
+                <div class="example-notation">
+                    <div class="notation-title">Example Sthayi (Raag Yaman)</div>
+                    <div class="notation-line">Ni Re Ga - | Ma Ga Re Sa ||</div>
+                    <div class="notation-line">Re Ga Ma Dha | Pa - Ma Ga ||</div>
+                    <div style="margin-top: 10px; color: #3b82f6; font-family: 'Segoe UI', sans-serif;">
+                        Notice: Moves within comfortable range, ends on Sa (resolution)
+                    </div>
+                </div>
+                
+                <div class="why-box">
+                    <h4>Why Does Sthayi Exist?</h4>
+                    <ul>
+                        <li><strong>Musical Identity:</strong> It's the "tune" people remember, like your tabla theme</li>
+                        <li><strong>Raag Introduction:</strong> Establishes which raag you're playing in first few notes</li>
+                        <li><strong>Structural Anchor:</strong> Reference point - all other sections relate to this</li>
+                        <li><strong>Comfortable Range:</strong> Middle register is easy to sing along, pleasant to hear</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SECTION 2: ANTARA -->
+            <div class="section-block">
+                <div class="section-title">
+                    <span class="section-number">2</span>
+                    <span>Antarā (अन्तरा) - The Development</span>
+                </div>
+                
+                <div class="comparison-grid">
+                    <div class="tabla-box">
+                        <h4>🥁 Tabla Equivalent: Palta/Variation</h4>
+                        <p>Your development section:</p>
+                        <ul style="list-style: none; padding-left: 15px; margin-top: 10px;">
+                            <li>• Takes the theme into new territory</li>
+                            <li>• Adds complexity and variation</li>
+                            <li>• Explores different bol patterns</li>
+                            <li>• Eventually returns to theme</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitar-box">
+                        <h4>🎵 Sitar: The Exploration</h4>
+                        <p>The contrasting melodic section:</p>
+                        <ul style="list-style: none; padding-left: 15px; margin-top: 10px;">
+                            <li>• Goes to upper octave (Sa' and above)</li>
+                            <li>• More complex melodic phrases</li>
+                            <li>• Shows different aspect of raag</li>
+                            <li>• Leads back to Sthayi</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="connection-box">
+                    <h4>🔗 The Connection</h4>
+                    <p>Antara is like your palta or variation in tabla - it takes the established foundation somewhere new! Just as your tabla variations explore different bol combinations while maintaining the underlying structure, Antara explores different melodic territory while staying in the same raag. <strong>Theme → Variation → Theme</strong> becomes <strong>Sthayi → Antara → Sthayi</strong>.</p>
+                </div>
+                
+                <div class="example-notation">
+                    <div class="notation-title">Example Antara (continues from above Sthayi)</div>
+                    <div class="notation-line">Sa' Ni Dha Pa | Ma' Dha Pa Ma ||</div>
+                    <div class="notation-line">Dha Pa Ma Ga | Re - - Sa ||</div>
+                    <div style="margin-top: 10px; color: #22c55e; font-family: 'Segoe UI', sans-serif;">
+                        Notice: Goes to Sa' (upper octave), more elaborate, returns down to Sa
+                    </div>
+                </div>
+                
+                <div class="why-box">
+                    <h4>Why Does Antara Exist?</h4>
+                    <ul>
+                        <li><strong>Contrast & Interest:</strong> Keeps listener engaged, like variation after theme</li>
+                        <li><strong>Full Raag Display:</strong> Shows upper tetrachord (Sa'-Sa''), completing picture</li>
+                        <li><strong>Dynamic Arc:</strong> Creates tension (high notes) → resolution (return to Sthayi)</li>
+                        <li><strong>Compositional Depth:</strong> One section = simple, two sections = complete composition</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SECTION 3: SANCHARI (OPTIONAL) -->
+            <div class="section-block">
+                <div class="section-title">
+                    <span class="section-number">3</span>
+                    <span>Sañchārī (संचारी) - The Wandering (Optional)</span>
+                </div>
+                
+                <div class="comparison-grid">
+                    <div class="tabla-box">
+                        <h4>🥁 Tabla Equivalent: Extended Development</h4>
+                        <p>In longer compositions (like Peshkar):</p>
+                        <ul style="list-style: none; padding-left: 15px; margin-top: 10px;">
+                            <li>• Further variations and elaborations</li>
+                            <li>• Explores different layakari</li>
+                            <li>• Multiple tukras or variations</li>
+                            <li>• Builds intensity before return</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitar-box">
+                        <h4>🎵 Sitar: The Adventure</h4>
+                        <p>Found in dhrupad, longer compositions:</p>
+                        <ul style="list-style: none; padding-left: 15px; margin-top: 10px;">
+                            <li>• Moves through middle register freely</li>
+                            <li>• "Wanders" (sanchara = to move)</li>
+                            <li>• Most creative/improvisational</li>
+                            <li>• Links Antara back to final section</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="connection-box">
+                    <h4>🔗 The Connection</h4>
+                    <p>Sanchari is like when you do multiple paltas in tabla before returning to theme - extended development! Not every composition has this (like not every tabla piece has extensive variations). It's for <strong>longer, more elaborate compositions</strong>. Think of it as the "vistar" (expansion) section.</p>
+                </div>
+                
+                <div class="practical-tip">
+                    <h4>💡 For Beginners</h4>
+                    <p>Most beginner sitar compositions skip Sanchari - they just have Sthayi + Antara. That's perfectly fine! Even most film songs only have two sections (antara versions = verse variations). Don't worry about this until you're working on classical dhrupad or longer bandishes.</p>
+                </div>
+            </div>
+
+            <!-- SECTION 4: ABHOG (RARE) -->
+            <div class="section-block">
+                <div class="section-title">
+                    <span class="section-number">4</span>
+                    <span>Ābhog (आभोग) - The Conclusion (Rare)</span>
+                </div>
+                
+                <div class="comparison-grid">
+                    <div class="tabla-box">
+                        <h4>🥁 Tabla Equivalent: Tihai/Final Statement</h4>
+                        <p>The grand finale:</p>
+                        <ul style="list-style: none; padding-left: 15px; margin-top: 10px;">
+                            <li>• Tihai that ends on sam perfectly</li>
+                            <li>• Final powerful resolution</li>
+                            <li>• Brings everything together</li>
+                            <li>• Signals "this is the end!"</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sitar-box">
+                        <h4>🎵 Sitar: The Grand Finale</h4>
+                        <p>Only in formal dhrupad compositions:</p>
+                        <ul style="list-style: none; padding-left: 15px; margin-top: 10px;">
+                            <li>• Highest register (upper Sa')</li>
+                            <li>• Most elaborate and decorated</li>
+                            <li>• Brings full power of raag</li>
+                            <li>• Clear final resolution to Sa</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="connection-box">
+                    <h4>🔗 The Connection</h4>
+                    <p>Abhog is like a perfectly executed tihai - it's the conclusion that leaves no doubt the piece is complete. Just as your tihai mathematically lands on sam with authority, Abhog melodically confirms the final resolution. <strong>Very rare in light classical or beginner music!</strong></p>
+                </div>
+                
+                <div class="practical-tip">
+                    <h4>💡 Reality Check</h4>
+                    <p>You'll rarely encounter Abhog except in: (1) Dhrupad vocals, (2) Very formal traditional bandishes, (3) Academic study. 99% of sitar compositions you learn will be just <strong>Sthayi + Antara</strong>. It's like learning about rare tabla compositions - good to know they exist, but not your daily practice!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISUAL SUMMARY -->
+        <div class="comparison-card">
+            <h2 style="color: #1e3a8a; text-align: center; margin-bottom: 30px; font-size: 2em;">
+                📊 Visual Structure Comparison
+            </h2>
+            
+            <div class="visual-diagram">
+                <h3 style="color: #dc2626; margin-bottom: 20px;">🥁 Typical Tabla Composition Flow</h3>
+                <div class="flow-chart">
+                    <div class="flow-box flow-sthayi">Theme</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box flow-antara">Variation 1</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box flow-sthayi">Theme</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box flow-antara">Variation 2</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box flow-sthayi">Theme</div>
+                </div>
+            </div>
+            
+            <div class="visual-diagram">
+                <h3 style="color: #059669; margin-bottom: 20px;">🎵 Typical Sitar Composition Flow</h3>
+                <div class="flow-chart">
+                    <div class="flow-box flow-sthayi">Sthayi</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box flow-antara">Antara</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box flow-sthayi">Sthayi</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box flow-antara">Antara</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box flow-sthayi">Sthayi</div>
+                </div>
+            </div>
+            
+            <div class="connection-box" style="margin-top: 30px;">
+                <h4>✨ See the Parallel?</h4>
+                <p>The structure is IDENTICAL! Both alternate between foundation and development. Both return to the "home" repeatedly. Both create interest through contrast while maintaining unity. You already understand this structure deeply from tabla - now you're just applying it melodically instead of rhythmically!</p>
+            </div>
+        </div>
+
+        <!-- PRACTICAL APPLICATION -->
+        <div class="comparison-card">
+            <h2 style="color: #1e3a8a; margin-bottom: 25px; font-size: 2em;">🎯 Practical Guide for Your Learning</h2>
+            
+            <div class="why-box">
+                <h4>What You'll Actually Encounter as a Beginner:</h4>
+                <ul>
+                    <li><strong>Simple Bandishes (compositions):</strong> Sthayi + Antara only. This is 90% of what you'll play.</li>
+                    <li><strong>Film Songs on Sitar:</strong> Called mukhda (Sthayi) and antara. Same thing, different context.</li>
+                    <li><strong>Your Practice Pieces:</strong> Usually just two sections. Learn Sthayi first, then add Antara.</li>
+                    <li><strong>Gats (instrumental compositions):</strong> Also Sthayi + Antara. Then improvisation in between.</li>
+                </ul>
+            </div>
+            
+            <div class="practical-tip">
+                <h4>💡 How to Learn a New Composition</h4>
+                <p><strong>Step 1:</strong> Master Sthayi completely. Play it 50 times until it's automatic. This is your anchor.<br><br>
+                <strong>Step 2:</strong> Learn Antara separately. Notice how it contrasts (higher notes, different phrases).<br><br>
+                <strong>Step 3:</strong> Connect them: Sthayi → Antara → Sthayi. Feel the journey: home → away → home.<br><br>
+                <strong>Step 4:</strong> Add tabla accompaniment. Now you're in conversation between melody and rhythm!</p>
+            </div>
+            
+            <div class="example-notation">
+                <div class="notation-title">Your "Prabhat Raga" from Earlier - Structure Breakdown</div>
+                <div class="notation-line"><strong style="color: #3b82f6;">STHAYI (Section A):</strong></div>
+                <div class="notation-line">Sa Re Ga Re | Sa - - - | Pa Ma Ga Ma | Pa - - - ||</div>
+                <div class="notation-line">Dha Pa Ma Ga | Ma Re Sa Re | Ga - Re - | Sa - - - ||</div>
+                <div style="margin: 15px 0; color: #555; font-family: 'Segoe UI', sans-serif;">
+                    ↑ Notice: Middle register, ends on Sa (home), establishes Bilawal
+                </div>
+                
+                <div class="notation-line"><strong style="color: #22c55e;">ANTARA (Section B):</strong></div>
+                <div class="notation-line">Sa' Ni Dha Pa | Dha Ma Pa Ma | Ga - - - | Ma Re Sa Re ||</div>
+                <div class="notation-line">Ga Ma Pa Dha | Pa Ma Ga Re | Sa Re Ga Re | Sa - - - ||</div>
+                <div style="margin: 15px 0; color: #555; font-family: 'Segoe UI', sans-serif;">
+                    ↑ Notice: Goes to Sa' (upper octave), more movement, returns to Sa
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #fef3c7; border-radius: 8px; color: #555; font-family: 'Segoe UI', sans-serif;">
+                    <strong style="color: #f59e0b;">Performance:</strong> Play A → B → A (or A → B → A → B → A for longer version)
+                </div>
+            </div>
+        </div>
+
+        <!-- FINAL WISDOM -->
+        <div class="key-insight">
+            <h2>🎓 Final Wisdom for Tabla Players</h2>
+            <p><strong>You have a huge advantage!</strong> Most sitar beginners struggle to understand why compositions have sections - it feels arbitrary. But you <em>already know</em> this from tabla! You understand theme and variation, you understand returning to the mukhra, you understand structural cycles. That's exactly what Sthayi and Antara are.</p>
+            <p style="margin-top: 15px;"><strong>The only difference:</strong> In tabla, you express structure through rhythm and bols. In sitar, you express the same structure through melody and pitch. The underlying musical architecture? <em>Identical.</em></p>
+            <p style="margin-top: 15px; font-size: 1.2em; font-style: italic;">स्थायी और अन्तरा = मुखड़ा और पलटा 🎵</p>
+        </div>
+
+    </div>
+</body>
+</html>
