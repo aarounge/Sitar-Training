@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Sargams — Sitar Repertoire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8c97a;
+            --gold-pale: #f5e9c8;
+            --ink: #0f0e0d;
+            --ink-mid: #2a2520;
+            --ink-soft: #5a4f45;
+            --cream: #faf7f2;
+            --cream-warm: #f2ece0;
+            --accent-red: #8b2c2c;
+            --accent-teal: #1a5c5c;
+            --note-sa: #c9a84c;
+            --note-pa: #1a5c5c;
+            --note-beat: #8b2c2c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--ink);
+            color: var(--cream);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Background texture ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse 80% 50% at 20% 20%, rgba(201,168,76,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(26,92,92,0.06) 0%, transparent 60%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 25px 80px;
+        }
+
+        /* ── Header ── */
+        .site-header {
+            text-align: center;
+            padding: 60px 20px 50px;
+            border-bottom: 1px solid rgba(201,168,76,0.25);
+            margin-bottom: 60px;
+        }
+
+        .site-header .eyebrow {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85em;
+            letter-spacing: 0.35em;
+            color: var(--gold);
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        .site-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.4em, 6vw, 4.5em);
+            font-weight: 600;
+            color: var(--cream);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: 0.02em;
+        }
+
+        .site-header h1 span {
+            color: var(--gold);
+        }
+
+        .site-header p {
+            font-size: 1.25em;
+            color: rgba(250,247,242,0.65);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .ornament {
+            color: var(--gold);
+            font-size: 1.8em;
+            letter-spacing: 0.4em;
+            display: block;
+            margin: 20px 0;
+            opacity: 0.6;
+        }
+
+        /* ── Nav pills ── */
+        .nav-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 55px;
+        }
+
+        .nav-pill {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8em;
+            letter-spacing: 0.12em;
+            color: rgba(250,247,242,0.55);
+            border: 1px solid rgba(201,168,76,0.25);
+            padding: 9px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            background: transparent;
+            transition: all 0.3s;
+        }
+
+        .nav-pill:hover, .nav-pill.active {
+            color: var(--gold);
+            border-color: var(--gold);
+            background: rgba(201,168,76,0.08);
+        }
+
+        /* ── Section label ── */
+        .section-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75em;
+            letter-spacing: 0.4em;
+            color: var(--gold);
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 60px;
+        }
+
+        /* ── Sargam card ── */
+        .sargam-card {
+            background: linear-gradient(145deg, rgba(250,247,242,0.04) 0%, rgba(250,247,242,0.015) 100%);
+            border: 1px solid rgba(201,168,76,0.18);
+            border-radius: 4px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            transition: border-color 0.4s;
+        }
+
+        .sargam-card:hover {
+            border-color: rgba(201,168,76,0.45);
+        }
+
+        .card-top {
+            padding: 35px 40px 25px;
+            border-bottom: 1px solid rgba(201,168,76,0.12);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .card-raag {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6em;
+            color: var(--gold-light);
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+
+        .card-name {
+            font-size: 2em;
+            font-weight: 600;
+            color: var(--cream);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .card-desc {
+            font-size: 1.1em;
+            color: rgba(250,247,242,0.55);
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .meta-tags {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.72em;
+            letter-spacing: 0.15em;
+            padding: 6px 14px;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+
+        .tag-taal {
+            background: rgba(26,92,92,0.25);
+            color: #7ecfcf;
+            border: 1px solid rgba(26,92,92,0.4);
+        }
+
+        .tag-level {
+            background: rgba(201,168,76,0.12);
+            color: var(--gold);
+            border: 1px solid rgba(201,168,76,0.3);
+        }
+
+        .tag-duration {
+            background: rgba(139,44,44,0.2);
+            color: #e09090;
+            border: 1px solid rgba(139,44,44,0.35);
+        }
+
+        /* ── Notation area ── */
+        .notation-wrap {
+            padding: 30px 40px;
+        }
+
+        .notation-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7em;
+            letter-spacing: 0.35em;
+            color: var(--gold);
+            margin-bottom: 16px;
+            margin-top: 28px;
+            text-transform: uppercase;
+        }
+
+        .notation-label:first-child {
+            margin-top: 0;
+        }
+
+        .sargam-line {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 1.1em;
+            line-height: 2.4;
+            color: rgba(250,247,242,0.85);
+            background: rgba(0,0,0,0.25);
+            border: 1px solid rgba(201,168,76,0.1);
+            border-radius: 3px;
+            padding: 16px 20px;
+            margin-bottom: 8px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        /* Note colours */
+        .n-sa { color: var(--gold); font-weight: 600; }
+        .n-pa { color: #7ecfcf; font-weight: 600; }
+        .n-beat { color: #e09090; font-weight: 700; font-size: 0.9em; vertical-align: super; }
+        .n-hi { color: #a8d8a8; }       /* upper octave */
+        .n-lo { color: #d4a0e0; }       /* lower octave */
+        .n-sharp { color: #ffca7a; font-weight: 600; } /* tivra Ma# */
+        .n-flat { color: #a0c4ff; }     /* komal notes */
+        .n-pause { color: rgba(250,247,242,0.25); }
+        .n-bar { color: rgba(201,168,76,0.4); margin: 0 4px; }
+
+        .annotation {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            color: rgba(250,247,242,0.4);
+            font-style: italic;
+            padding: 8px 20px 4px;
+        }
+
+        /* ── Tabla box ── */
+        .tabla-box {
+            margin: 25px 40px 5px;
+            background: rgba(201,168,76,0.06);
+            border-left: 3px solid var(--gold);
+            padding: 18px 22px;
+            border-radius: 0 3px 3px 0;
+        }
+
+        .tabla-box .tb-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.72em;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .tabla-box p {
+            font-size: 1em;
+            color: rgba(250,247,242,0.6);
+            line-height: 1.7;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        /* ── Tips accordion ── */
+        .tips-toggle {
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: none;
+            border-top: 1px solid rgba(201,168,76,0.12);
+            padding: 18px 40px;
+            color: rgba(250,247,242,0.45);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1em;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .tips-toggle:hover { color: var(--gold-light); }
+
+        .tips-toggle .arrow { transition: transform 0.3s; }
+        .tips-toggle.open .arrow { transform: rotate(180deg); }
+
+        .tips-body {
+            display: none;
+            padding: 0 40px 30px;
+        }
+
+        .tips-body.visible { display: block; }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .tip-item {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(250,247,242,0.07);
+            border-radius: 3px;
+            padding: 16px 18px;
+        }
+
+        .tip-item strong {
+            display: block;
+            color: var(--gold-light);
+            font-size: 0.95em;
+            margin-bottom: 6px;
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+        }
+
+        .tip-item p {
+            font-size: 0.95em;
+            color: rgba(250,247,242,0.55);
+            line-height: 1.6;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        /* ── Legend ── */
+        .legend {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(201,168,76,0.15);
+            border-radius: 4px;
+            padding: 28px 35px;
+            margin-bottom: 50px;
+        }
+
+        .legend h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85em;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            margin-bottom: 18px;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .legend-item {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.95em;
+            color: rgba(250,247,242,0.55);
+            line-height: 1.8;
+        }
+
+        .legend-item .sample {
+            display: inline-block;
+            width: 36px;
+        }
+
+        /* ── Footer ── */
+        .site-footer {
+            text-align: center;
+            padding: 50px 20px 20px;
+            border-top: 1px solid rgba(201,168,76,0.15);
+            margin-top: 60px;
+        }
+
+        .site-footer p {
+            color: rgba(250,247,242,0.3);
+            font-style: italic;
+            font-size: 1.05em;
+        }
+
+        @media (max-width: 700px) {
+            .card-top { grid-template-columns: 1fr; }
+            .meta-tags { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
+            .notation-wrap, .tabla-box, .tips-toggle, .tips-body { padding-left: 20px; padding-right: 20px; }
+            .sargam-line { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <header class="site-header">
+        <p class="eyebrow">Sitar Repertoire for Public Performance</p>
+        <h1>Performance <span>Sargams</span></h1>
+        <span class="ornament">❧ ✦ ❧</span>
+        <p>Six complete compositions in classical sargam notation — ready to perform, each designed around your tabla foundation.</p>
+    </header>
+
+    <!-- Legend -->
+    <div class="legend">
+        <h3>Notation Guide</h3>
+        <div class="legend-grid">
+            <div class="legend-item"><span class="sample n-sa">Sa</span> Tonic — always your anchor</div>
+            <div class="legend-item"><span class="sample n-pa">Pa</span> Fifth — second anchor note</div>
+            <div class="legend-item"><span class="sample n-sharp">Ma#</span> Tivra Madhyam (sharp Ma)</div>
+            <div class="legend-item"><span class="sample n-flat">Re♭</span> Komal note (flat)</div>
+            <div class="legend-item"><span class="sample n-hi">Sa'</span> Upper octave note</div>
+            <div class="legend-item"><span class="sample n-lo">Ni.</span> Lower octave note</div>
+            <div class="legend-item"><span class="sample n-beat">X</span> Sam / Beat markers</div>
+            <div class="legend-item"><span class="sample n-pause">—</span> Hold / rest this beat</div>
+            <div class="legend-item"><span class="sample n-bar">|</span> Bar line (4 beats)</div>
+        </div>
+    </div>
+
+    <nav class="nav-strip">
+        <button class="nav-pill active">All</button>
+        <button class="nav-pill">Beginner</button>
+        <button class="nav-pill">Intermediate</button>
+        <button class="nav-pill">Yaman</button>
+        <button class="nav-pill">Bilawal</button>
+    </nav>
+
+    <!-- ═══════════════════════════════════════
+         SARGAM 1 — Yaman Pakad Gat
+    ═══════════════════════════════════════ -->
+    <p class="section-label">Composition 01</p>
+    <div class="sargam-card">
+        <div class="card-top">
+            <div>
+                <div class="card-raag">Raag Yaman</div>
+                <div class="card-name">Yaman Pakad Gat</div>
+                <div class="card-desc">The most recognisable Yaman melody — that signature Ma# phrase audiences hear and immediately feel. This is your go-to opener.</div>
+            </div>
+            <div class="meta-tags">
+                <span class="tag tag-taal">Teen Taal · 16 beats</span>
+                <span class="tag tag-level">Beginner</span>
+                <span class="tag tag-duration">90 sec</span>
+            </div>
+        </div>
+
+        <div class="notation-wrap">
+            <div class="notation-label">Sthayi — Main Theme</div>
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-lo">Ni</span> <span class="n-flat">Re</span> <span class="n-flat">Ga</span> <span class="n-sharp">Ma#</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-flat">Ga</span> <span class="n-flat">Re</span> <span class="n-sa">Sa</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">0</span>  <span class="n-lo">Ni</span> <span class="n-pause">—</span> Dha <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-pa">Pa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+            <div class="annotation">↑ This opening phrase IS Yaman. Audiences recognise it in the first two bars.</div>
+
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-pa">Pa</span> <span class="n-sharp">Ma#</span> <span class="n-flat">Ga</span> <span class="n-flat">Re</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-flat">Ga</span> <span class="n-sharp">Ma#</span> Dha <span class="n-pa">Pa</span>  <span class="n-bar">|</span>  <span class="n-beat">0</span>  Dha <span class="n-pause">—</span> <span class="n-pa">Pa</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-sharp">Ma#</span> <span class="n-flat">Ga</span> <span class="n-flat">Re</span> <span class="n-sa">Sa</span>
+            </div>
+
+            <div class="notation-label">Antara — Upper Octave</div>
+            <div class="sargam-line">
+<span class="n-beat">X</span>  Dha Ni <span class="n-hi">Re'</span> <span class="n-hi">Ga'</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-hi">Ma#'</span> <span class="n-hi">Ga'</span> <span class="n-hi">Re'</span> Ni  <span class="n-bar">|</span>  <span class="n-beat">0</span>  Dha <span class="n-pause">—</span> <span class="n-pa">Pa</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-sharp">Ma#</span> <span class="n-flat">Ga</span> <span class="n-flat">Re</span> <span class="n-pause">—</span>
+            </div>
+
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-hi">Re'</span> <span class="n-hi">Ga'</span> <span class="n-hi">Ma#'</span> Ni  <span class="n-bar">|</span>  <span class="n-beat">2</span>  Dha <span class="n-pa">Pa</span> <span class="n-sharp">Ma#</span> <span class="n-flat">Ga</span>  <span class="n-bar">|</span>  <span class="n-beat">0</span>  <span class="n-flat">Re</span> <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+            <div class="annotation">↑ Return to Sa on the final beat 13 — lands beautifully before repeating Sthayi.</div>
+
+            <div class="notation-label">Tihai Ending (Repeat 3×, lands on Sam)</div>
+            <div class="sargam-line">
+<span class="n-flat">Ga</span> <span class="n-sharp">Ma#</span> <span class="n-pa">Pa</span> Dha  <span class="n-bar">|</span>  <span class="n-flat">Ga</span> <span class="n-sharp">Ma#</span> <span class="n-pa">Pa</span> Dha  <span class="n-bar">|</span>  <span class="n-flat">Ga</span> <span class="n-sharp">Ma#</span> <span class="n-pa">Pa</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">X</span> <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+            <div class="annotation">↑ Classic tihai! You know this structure from tabla — three equal phrases landing on sam.</div>
+        </div>
+
+        <div class="tabla-box">
+            <div class="tb-label">🥁 Tabla Player's Edge</div>
+            <p>You already know this tihai concept perfectly — three equal repeating phrases that land on sam. You've played hundreds of tihais on tabla. Now it's melodic. The maths is identical. When you perform this, your tihai will be precisely placed in a way most sitar beginners can never achieve.</p>
+        </div>
+
+        <button class="tips-toggle" onclick="toggleTips(this)">
+            <span>Performance Tips</span>
+            <span class="arrow">▾</span>
+        </button>
+        <div class="tips-body">
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <strong>Opening Alap</strong>
+                    <p>Before the gat, play free-tempo: Ni Re Ga Ma# … hold Ma# for 4-5 seconds. The audience feels Yaman before you even start the rhythm section.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Emphasise Ga</strong>
+                    <p>Ga is the vadi (king note) of Yaman. Whenever it appears, play it slightly louder. This is what makes Yaman sound like Yaman.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Sam Arrival</strong>
+                    <p>Make every sam (X beat) arrival feel intentional. A slight accent on beat 1 of each cycle signals musical authority to any musicians and listeners present.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Tempo</strong>
+                    <p>45 BPM vilambit. Slow is sophisticated. Audiences find slow Yaman more moving than fast. Resist the urge to speed up.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SARGAM 2 — Bhupali
+    ═══════════════════════════════════════ -->
+    <p class="section-label">Composition 02</p>
+    <div class="sargam-card">
+        <div class="card-top">
+            <div>
+                <div class="card-raag">Raag Bhupali</div>
+                <div class="card-name">Pahadi Dhun</div>
+                <div class="card-desc">Five notes only. Pure pentatonic beauty. Bhupali is the most universally loved raag — audiences who've never heard classical music are immediately moved by it.</div>
+            </div>
+            <div class="meta-tags">
+                <span class="tag tag-taal">Teen Taal · 16 beats</span>
+                <span class="tag tag-level">Beginner</span>
+                <span class="tag tag-duration">75 sec</span>
+            </div>
+        </div>
+
+        <div class="notation-wrap">
+            <div class="notation-label">Scale — Only 5 Notes (No Ma, No Ni)</div>
+            <div class="sargam-line">
+<span class="n-sa">Sa</span>  <span class="n-flat">Re</span>  <span class="n-flat">Ga</span>  <span class="n-pa">Pa</span>  Dha  <span class="n-hi">Sa'</span>  <span class="n-bar">|</span>  <span class="n-hi">Sa'</span>  Dha  <span class="n-pa">Pa</span>  <span class="n-flat">Ga</span>  <span class="n-flat">Re</span>  <span class="n-sa">Sa</span>
+            </div>
+            <div class="annotation">↑ 5 notes total. Every single note is safe. No Ma#, no Ni. Impossible to play a wrong note!</div>
+
+            <div class="notation-label">Sthayi</div>
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-sa">Sa</span> <span class="n-flat">Ga</span> <span class="n-flat">Re</span> <span class="n-sa">Sa</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-pa">Pa</span> <span class="n-pause">—</span> Dha <span class="n-pa">Pa</span>  <span class="n-bar">|</span>  <span class="n-beat">0</span>  <span class="n-flat">Ga</span> <span class="n-pause">—</span> <span class="n-flat">Re</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-flat">Re</span> <span class="n-flat">Ga</span> <span class="n-pa">Pa</span> Dha  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-pa">Pa</span> <span class="n-flat">Ga</span> <span class="n-flat">Re</span> <span class="n-sa">Sa</span>  <span class="n-bar">|</span>  <span class="n-beat">0</span>  <span class="n-flat">Ga</span> <span class="n-pause">—</span> <span class="n-flat">Re</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+
+            <div class="notation-label">Antara</div>
+            <div class="sargam-line">
+<span class="n-beat">X</span>  Dha <span class="n-hi">Sa'</span> <span class="n-hi">Re'</span> <span class="n-hi">Ga'</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-hi">Re'</span> <span class="n-hi">Sa'</span> Dha <span class="n-pa">Pa</span>  <span class="n-bar">|</span>  <span class="n-beat">0</span>  Dha <span class="n-flat">Ga</span> <span class="n-flat">Re</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+            <div class="annotation">↑ The antara leaps to Sa' — that single jump creates huge emotional impact with minimal technique.</div>
+
+            <div class="notation-label">Tihai Ending</div>
+            <div class="sargam-line">
+<span class="n-sa">Sa</span> <span class="n-flat">Re</span> <span class="n-flat">Ga</span> <span class="n-pa">Pa</span>  <span class="n-bar">|</span>  <span class="n-sa">Sa</span> <span class="n-flat">Re</span> <span class="n-flat">Ga</span> <span class="n-pa">Pa</span>  <span class="n-bar">|</span>  <span class="n-sa">Sa</span> <span class="n-flat">Re</span> <span class="n-flat">Ga</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">X</span> <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+        </div>
+
+        <div class="tabla-box">
+            <div class="tb-label">🥁 Tabla Player's Edge</div>
+            <p>Bhupali is pentatonic — the same structure as many folk and devotional scales you've accompanied on tabla. Your muscle memory for the rhythmic flow in these simpler scales will make this piece feel almost effortless. Use the simplicity to focus entirely on expression rather than notes.</p>
+        </div>
+
+        <button class="tips-toggle" onclick="toggleTips(this)">
+            <span>Performance Tips</span>
+            <span class="arrow">▾</span>
+        </button>
+        <div class="tips-body">
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <strong>Secret Weapon</strong>
+                    <p>Bhupali sounds like it could be a film song or folk melody. Non-classical audiences connect to it emotionally far faster than Yaman. Use it for mixed audiences.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Pauses are Music</strong>
+                    <p>The rests (—) are as important as the notes. Bhupali breathes. Don't fill every beat. Let the notes ring and decay — that resonance is the raga.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Evening Raag</strong>
+                    <p>Play this at your Saturday open mic right as evening begins. Timing matches the raag's samay. A small detail that musicians in the audience will appreciate.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>For Short Sets</strong>
+                    <p>If you only have 90 seconds, Bhupali is your piece. It opens and resolves quickly without feeling rushed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SARGAM 3 — Bilawal Morning Gat
+    ═══════════════════════════════════════ -->
+    <p class="section-label">Composition 03</p>
+    <div class="sargam-card">
+        <div class="card-top">
+            <div>
+                <div class="card-raag">Raag Bilawal</div>
+                <div class="card-name">Prabhat Geet</div>
+                <div class="card-desc">All natural notes — bright, balanced and technically forgiving. Bilawal is the cleanest possible showcase of your sitar tone. Perfect for daytime or morning performances.</div>
+            </div>
+            <div class="meta-tags">
+                <span class="tag tag-taal">Rupak Taal · 7 beats</span>
+                <span class="tag tag-level">Beginner</span>
+                <span class="tag tag-duration">75 sec</span>
+            </div>
+        </div>
+
+        <div class="notation-wrap">
+            <div class="notation-label">Rupak Taal Structure (3+2+2)</div>
+            <div class="sargam-line">
+<span class="n-beat">0</span> <span class="n-sa">Sa</span> <span class="n-flat">Re</span> <span class="n-flat">Ga</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span> <span class="n-sharp">Ma</span> <span class="n-pa">Pa</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span> Dha Ni  <span class="n-bar">||</span>  … 7 beats total
+            </div>
+            <div class="annotation">↑ Rupak starts on khali (0) — unusual! Creates an elegant, floating feeling different from teen taal.</div>
+
+            <div class="notation-label">Sthayi</div>
+            <div class="sargam-line">
+<span class="n-beat">0</span>  <span class="n-sa">Sa</span> <span class="n-flat">Re</span> <span class="n-flat">Ga</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-sharp">Ma</span> <span class="n-pa">Pa</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-pa">Pa</span> <span class="n-sharp">Ma</span>  <span class="n-bar">||</span>  <span class="n-beat">0</span>  <span class="n-flat">Ga</span> <span class="n-flat">Re</span> <span class="n-sa">Sa</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-pause">—</span> <span class="n-sa">Sa</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span>
+            </div>
+
+            <div class="sargam-line">
+<span class="n-beat">0</span>  <span class="n-flat">Re</span> <span class="n-flat">Ga</span> <span class="n-sharp">Ma</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  Dha <span class="n-pa">Pa</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-sharp">Ma</span> <span class="n-flat">Ga</span>  <span class="n-bar">||</span>  <span class="n-beat">0</span>  <span class="n-flat">Re</span> <span class="n-sa">Sa</span> Ni  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+
+            <div class="notation-label">Antara</div>
+            <div class="sargam-line">
+<span class="n-beat">0</span>  <span class="n-pa">Pa</span> Dha Ni  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-hi">Sa'</span> Ni  <span class="n-bar">|</span>  <span class="n-beat">3</span>  Dha <span class="n-pa">Pa</span>  <span class="n-bar">||</span>  <span class="n-beat">0</span>  <span class="n-sharp">Ma</span> <span class="n-flat">Ga</span> <span class="n-flat">Re</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+        </div>
+
+        <div class="tabla-box">
+            <div class="tb-label">🥁 Tabla Player's Edge</div>
+            <p>Rupak taal starts on khali — every tabla player knows this taal. You'll feel the 3+2+2 structure instinctively. This is where non-tabla sitar players often drift; you will be rock-solid. That rhythmic precision in Rupak is immediately noticeable and impressive to listeners.</p>
+        </div>
+
+        <button class="tips-toggle" onclick="toggleTips(this)">
+            <span>Performance Tips</span>
+            <span class="arrow">▾</span>
+        </button>
+        <div class="tips-body">
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <strong>Rupak Announcement</strong>
+                    <p>Before playing, you can say: "This is in Rupak Taal — seven beats." It's a small detail that immediately signals classical knowledge to any musically literate audience member.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Natural Notes = Pure Tone</strong>
+                    <p>Bilawal is your tone test. No altered notes to hide behind. Play it clean, and your sitar tone itself becomes the art.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SARGAM 4 — Khamaj Thumri-style
+    ═══════════════════════════════════════ -->
+    <p class="section-label">Composition 04</p>
+    <div class="sargam-card">
+        <div class="card-top">
+            <div>
+                <div class="card-raag">Raag Khamaj</div>
+                <div class="card-name">Khamaj Thumri Riff</div>
+                <div class="card-desc">Khamaj is the most crowd-pleasing raag — it underlies countless film songs and semi-classical pieces. That single flat Ni gives it a warmth and folk familiarity that non-classical audiences adore.</div>
+            </div>
+            <div class="meta-tags">
+                <span class="tag tag-taal">Keherwa · 8 beats</span>
+                <span class="tag tag-level">Beginner</span>
+                <span class="tag tag-duration">60 sec</span>
+            </div>
+        </div>
+
+        <div class="notation-wrap">
+            <div class="notation-label">Khamaj Scale (Flat Ni only)</div>
+            <div class="sargam-line">
+<span class="n-sa">Sa</span>  <span class="n-flat">Re</span>  <span class="n-flat">Ga</span>  <span class="n-sharp">Ma</span>  <span class="n-pa">Pa</span>  Dha  <span class="n-flat">Ni♭</span>  <span class="n-hi">Sa'</span>  <span class="n-bar">|</span>  One komal note only — very easy!
+            </div>
+
+            <div class="notation-label">Main Theme (Keherwa 8 beats: X — — — | 2 — — —)</div>
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-sa">Sa</span> <span class="n-flat">Ga</span> <span class="n-pa">Pa</span> <span class="n-flat">Ga</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-flat">Re</span> <span class="n-sa">Sa</span> <span class="n-flat">Ni♭</span> <span class="n-sa">Sa</span>  <span class="n-bar">||</span>  <span class="n-beat">X</span>  <span class="n-flat">Re</span> <span class="n-flat">Ga</span> <span class="n-pa">Pa</span> Dha  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-pa">Pa</span> <span class="n-flat">Ga</span> <span class="n-flat">Re</span> <span class="n-sa">Sa</span>
+            </div>
+
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-pa">Pa</span> Dha <span class="n-flat">Ni♭</span> <span class="n-hi">Sa'</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-flat">Ni♭</span> Dha <span class="n-pa">Pa</span> <span class="n-pause">—</span>  <span class="n-bar">||</span>  <span class="n-beat">X</span>  Dha <span class="n-pa">Pa</span> <span class="n-flat">Ga</span> <span class="n-flat">Re</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+            <div class="annotation">↑ Flat Ni♭ creates the characteristic Khamaj warmth — that note alone connects to dozens of beloved songs.</div>
+
+            <div class="notation-label">Repeat & Fade (for open mic ending)</div>
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-sa">Sa</span> <span class="n-flat">Ga</span> <span class="n-pa">Pa</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>  <span class="n-bar">||</span>  …hold final <span class="n-sa">Sa</span> and let it ring …
+            </div>
+        </div>
+
+        <div class="tabla-box">
+            <div class="tb-label">🥁 Tabla Player's Edge</div>
+            <p>Keherwa — you know it in your sleep. Every qawwali, bhajan, and semi-classical piece you've accompanied used Keherwa. Playing Khamaj over Keherwa will feel like coming home. Your natural theka sense will lock this melody into the groove perfectly.</p>
+        </div>
+
+        <button class="tips-toggle" onclick="toggleTips(this)">
+            <span>Performance Tips</span>
+            <span class="arrow">▾</span>
+        </button>
+        <div class="tips-body">
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <strong>Most Accessible Raag</strong>
+                    <p>If you don't know your audience's musical background, play Khamaj. Its folk-adjacent warmth creates connection with everyone from classical scholars to people hearing sitar for the first time.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Keherwa Energy</strong>
+                    <p>Keherwa taal has natural forward momentum. Use it to create a lively, celebratory feeling rather than the meditative quality of teen taal compositions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SARGAM 5 — Yaman Vilambit
+    ═══════════════════════════════════════ -->
+    <p class="section-label">Composition 05</p>
+    <div class="sargam-card">
+        <div class="card-top">
+            <div>
+                <div class="card-raag">Raag Yaman</div>
+                <div class="card-name">Yaman Vilambit — The Slow Burn</div>
+                <div class="card-desc">Ultra-slow, meditative Yaman. Each note held and allowed to bloom. This is for moments when you want the audience to sit in silence and just listen. The most mature-sounding performance option you have right now.</div>
+            </div>
+            <div class="meta-tags">
+                <span class="tag tag-taal">Ektaal · 12 beats</span>
+                <span class="tag tag-level">Intermediate</span>
+                <span class="tag tag-duration">3 min</span>
+            </div>
+        </div>
+
+        <div class="notation-wrap">
+            <div class="notation-label">Ektaal (12 beats: X 0 2 0 3 4 | 0 0 5 0 6 0)</div>
+
+            <div class="notation-label">Alap Phrases (Free Tempo — Before Ektaal Begins)</div>
+            <div class="sargam-line">
+<span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-lo">Ni</span> <span class="n-flat">Re</span> <span class="n-flat">Ga</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-flat">Ga</span> <span class="n-pause">—</span> <span class="n-sharp">Ma#</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-flat">Ga</span> <span class="n-flat">Re</span> <span class="n-sa">Sa</span> <span class="n-pause">—</span>
+            </div>
+            <div class="annotation">↑ Hold each phrase. This is 30 seconds of music with 4 notes. That takes courage — and sounds extraordinary.</div>
+
+            <div class="sargam-line">
+<span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-pa">Pa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-sharp">Ma#</span> <span class="n-flat">Ga</span> <span class="n-flat">Re</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+
+            <div class="notation-label">Ektaal Sthayi (2 notes per beat — vilambit gat)</div>
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-lo">Ni</span>-<span class="n-flat">Re</span>  <span class="n-beat">0</span>  <span class="n-flat">Ga</span>-<span class="n-sharp">Ma#</span>  <span class="n-beat">2</span>  <span class="n-flat">Ga</span>-<span class="n-flat">Re</span>  <span class="n-beat">0</span>  <span class="n-sa">Sa</span>-<span class="n-pause">—</span>  <span class="n-beat">3</span>  <span class="n-lo">Ni</span>-<span class="n-pause">—</span>  <span class="n-beat">4</span>  Dha-<span class="n-pa">Pa</span>  <span class="n-beat">0</span>  <span class="n-pause">—</span>-<span class="n-pause">—</span>  <span class="n-beat">0</span>  <span class="n-sharp">Ma#</span>-<span class="n-flat">Ga</span>  <span class="n-beat">5</span>  <span class="n-flat">Re</span>-<span class="n-sa">Sa</span>  <span class="n-beat">0</span>  <span class="n-pause">—</span>-<span class="n-pause">—</span>  <span class="n-beat">6</span>  <span class="n-sa">Sa</span>-<span class="n-pause">—</span>  <span class="n-beat">0</span>  <span class="n-pause">—</span>-<span class="n-pause">—</span>
+            </div>
+            <div class="annotation">↑ 12 beats, 2 notes each = 24 note slots. Many are rests. The space IS the music.</div>
+
+            <div class="notation-label">Development — Exploring Upper Register</div>
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-pa">Pa</span>-Dha  <span class="n-beat">0</span>  Ni-<span class="n-hi">Re'</span>  <span class="n-beat">2</span>  <span class="n-hi">Ga'</span>-<span class="n-pause">—</span>  <span class="n-beat">0</span>  <span class="n-hi">Ma#'</span>-<span class="n-hi">Ga'</span>  <span class="n-beat">3</span>  <span class="n-hi">Re'</span>-Ni  <span class="n-beat">4</span>  Dha-<span class="n-pa">Pa</span>  <span class="n-beat">0</span>  <span class="n-sharp">Ma#</span>-<span class="n-flat">Ga</span>  <span class="n-beat">0</span>  <span class="n-flat">Re</span>-<span class="n-sa">Sa</span>  <span class="n-beat">5</span>  <span class="n-pause">—</span>-<span class="n-pause">—</span>  <span class="n-beat">0</span>  <span class="n-pause">—</span>-<span class="n-pause">—</span>  <span class="n-beat">6</span>  <span class="n-sa">Sa</span>-<span class="n-pause">—</span>  <span class="n-beat">0</span>  <span class="n-pause">—</span>-<span class="n-pause">—</span>
+            </div>
+        </div>
+
+        <div class="tabla-box">
+            <div class="tb-label">🥁 Tabla Player's Edge</div>
+            <p>Ektaal — 12 beats. You know this deeply. The unusual beat structure (X 0 2 0 3 4 | 0 0 5 0 6 0) with its multiple khalis sounds complex to audiences but is completely natural to you. Playing Yaman in Ektaal instead of the typical Teen Taal immediately signals advanced classical knowledge. Most beginners never attempt it.</p>
+        </div>
+
+        <button class="tips-toggle" onclick="toggleTips(this)">
+            <span>Performance Tips</span>
+            <span class="arrow">▾</span>
+        </button>
+        <div class="tips-body">
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <strong>Silence is Skill</strong>
+                    <p>The hardest part of vilambit is resisting the urge to fill every beat. A long held note followed by a perfect three-note phrase is worth more than constant motion. Trust the rests.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>For Serious Contexts</strong>
+                    <p>Use this version when performing for musicians, at classical events, or whenever you want to signal deep classical understanding. It says "I know what I'm doing" without a single word.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Alap First, Always</strong>
+                    <p>Never jump straight into the gat for this piece. The free-tempo alap is essential — it establishes the mood and prepares the listener. Minimum 45 seconds of alap before the taal begins.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SARGAM 6 — Bageshri Night Piece
+    ═══════════════════════════════════════ -->
+    <p class="section-label">Composition 06</p>
+    <div class="sargam-card">
+        <div class="card-top">
+            <div>
+                <div class="card-raag">Raag Bageshri</div>
+                <div class="card-name">Raat ki Raagini</div>
+                <div class="card-desc">Late night raag. Flat Ga and flat Ni create a deep, melancholic beauty that is unlike anything else in the repertoire. Perfect for the final piece of an evening set. Audiences go very quiet for Bageshri.</div>
+            </div>
+            <div class="meta-tags">
+                <span class="tag tag-taal">Teen Taal · 16 beats</span>
+                <span class="tag tag-level">Intermediate</span>
+                <span class="tag tag-duration">2 min</span>
+            </div>
+        </div>
+
+        <div class="notation-wrap">
+            <div class="notation-label">Bageshri Scale (Flat Ga and Ni — omits Re in aroh)</div>
+            <div class="sargam-line">
+<strong>Aroh:</strong>  <span class="n-sa">Sa</span>  <span class="n-flat">Ga♭</span>  <span class="n-sharp">Ma</span>  Dha  <span class="n-flat">Ni♭</span>  <span class="n-hi">Sa'</span>  <span class="n-bar">|</span>  <strong>Avaroh:</strong>  <span class="n-hi">Sa'</span>  <span class="n-flat">Ni♭</span>  Dha  <span class="n-sharp">Ma</span>  <span class="n-flat">Ga♭</span>  <span class="n-flat">Re</span>  <span class="n-sa">Sa</span>
+            </div>
+            <div class="annotation">↑ Re appears only descending! This asymmetry is what makes Bageshri sound so distinctive.</div>
+
+            <div class="notation-label">Sthayi</div>
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-sharp">Ma</span> Dha <span class="n-flat">Ni♭</span> Dha  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-sharp">Ma</span> <span class="n-flat">Ga♭</span> <span class="n-flat">Re</span> <span class="n-sa">Sa</span>  <span class="n-bar">|</span>  <span class="n-beat">0</span>  <span class="n-flat">Ga♭</span> <span class="n-pause">—</span> <span class="n-sharp">Ma</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  Dha <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-flat">Ni♭</span> Dha <span class="n-sharp">Ma</span> <span class="n-flat">Ga♭</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-flat">Re</span> <span class="n-sa">Sa</span> <span class="n-flat">Ga♭</span> <span class="n-sharp">Ma</span>  <span class="n-bar">|</span>  <span class="n-beat">0</span>  Dha <span class="n-pause">—</span> <span class="n-flat">Ni♭</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+            <div class="annotation">↑ The Ma-Dha-Ni♭ combination is the soul of Bageshri. That cluster is immediately recognisable.</div>
+
+            <div class="notation-label">Antara — Reaching for Sa'</div>
+            <div class="sargam-line">
+<span class="n-beat">X</span>  Dha <span class="n-flat">Ni♭</span> <span class="n-hi">Sa'</span> <span class="n-flat">Ni♭</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  Dha <span class="n-sharp">Ma</span> <span class="n-flat">Ga♭</span> <span class="n-sharp">Ma</span>  <span class="n-bar">|</span>  <span class="n-beat">0</span>  Dha <span class="n-pause">—</span> <span class="n-flat">Ni♭</span> <span class="n-hi">Sa'</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+
+            <div class="sargam-line">
+<span class="n-beat">X</span>  <span class="n-flat">Ni♭</span> Dha <span class="n-sharp">Ma</span> <span class="n-flat">Ga♭</span>  <span class="n-bar">|</span>  <span class="n-beat">2</span>  <span class="n-flat">Re</span> <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">0</span>  <span class="n-flat">Ga♭</span> <span class="n-sharp">Ma</span> Dha <span class="n-pause">—</span>  <span class="n-bar">|</span>  <span class="n-beat">3</span>  <span class="n-sa">Sa</span> <span class="n-pause">—</span> <span class="n-pause">—</span> <span class="n-pause">—</span>
+            </div>
+        </div>
+
+        <div class="tabla-box">
+            <div class="tb-label">🥁 Tabla Player's Edge</div>
+            <p>Bageshri is a night raag — it's best played at your Saturday open mic late in the evening set, or as a closing piece. The emotional depth of Bageshri combined with your rhythmic precision creates a memorable performance. You've accompanied this raag before; you know its weight. Now carry that weight melodically.</p>
+        </div>
+
+        <button class="tips-toggle" onclick="toggleTips(this)">
+            <span>Performance Tips</span>
+            <span class="arrow">▾</span>
+        </button>
+        <div class="tips-body">
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <strong>The Closing Piece</strong>
+                    <p>Always end your set with Bageshri if you play it. It's emotionally conclusive. Audiences leave with that melancholic resonance in their ears — they'll remember you.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Re Only Descending</strong>
+                    <p>The strict rule: Re appears only in the avaroha (descent). Never use Re going up. This restriction is what makes Bageshri distinctive — honour it and the raag will reward you.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Ma-Dha-Ni Cluster</strong>
+                    <p>The three-note phrase Ma-Dha-Ni♭ is your pakad. Return to it often. It's the musical signature that makes the audience feel "this is Bageshri" — even if they don't know the name.</p>
+                </div>
+                <div class="tip-item">
+                    <strong>Introduce It</strong>
+                    <p>"This last piece is a late-night raag called Bageshri — traditionally performed after 9pm." That sentence alone creates anticipation and shows depth of knowledge.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <span class="ornament">✦</span>
+        <p>Six raags. Two thaats. Multiple taals.<br>Your complete public performance vocabulary — for now.</p>
+        <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.4;">Sitar Learning Journey · Tabla to Sitar</p>
+    </footer>
+
+</div>
+
+<script>
+    function toggleTips(btn) {
+        btn.classList.toggle('open');
+        const body = btn.nextElementSibling;
+        body.classList.toggle('visible');
+    }
+</script>
+</body>
+</html>
